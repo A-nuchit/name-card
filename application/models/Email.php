@@ -24,7 +24,6 @@ class Email extends CI_Model
         if($this->email->send()) {
             return true; 
         }
-
          else {
          	return false;
         }

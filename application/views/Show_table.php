@@ -8,6 +8,7 @@
 				<th><center>นามสกุล</center></th>
 				<th><center>E-mail</center></th>
 				<th><center>เบอร์โทรศัพท์</center></th>
+				<th><center>รูป</center></th>
 		 
 			</tr>
 		</thead>
@@ -19,6 +20,7 @@
 					<td><?php echo $r->lastname; ?></td>
 					<td><?php echo $r->email; ?></td>
 					<td><?php echo $r->tel; ?></td>
+					<td><?php echo $r->pic; ?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>

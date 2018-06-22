@@ -39,13 +39,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="container" style="width: 40% ">
 		<div class="border">
 	  	<h2><center>Form</center></h2>
-	  	<?php echo form_open_multipart('welcome/add_user'); ?>
+	  	<?php echo form_open_multipart('welcome/login'); ?>
 	  	<form>
 	  		<div class="row">
 	  			<div class="col">
 		    		<div class="form-group">
 		      			<input type="text" class="form-control" placeholder="ชื่อ" name="name" required>
-		      			<small id="emailHelp" class="form-text text-danger"></small>
+		      			<small id="emailHelp" class="form-text text-danger">ภาษาไทยเท่านั้น</small>
 		    		</div>
 		    	</div>
 		    	<div class="col">
@@ -61,35 +61,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    	</div>
 		    	</div>
 		    </div>
-		    <div class="form-group">
+
+	    	<div class="form-group">
 	      		<input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="tel" required>
 	    	</div>
-		    <div class="row">
-	    		<div class="col">
-			    	<div class="form-group">
-			      			<input type="password" class="form-control" placeholder="password" name="password" required>
-			      			<small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
-							echo $message_display;
-							} ?></small>
-			    	</div>
-		    	</div>
-		    </div>
-		    <div class="row">
-	    		<div class="col">
-			    	<div class="form-group">
-			      			<input type="password" class="form-control" placeholder="comfirm password" name="confirm-password" required>
-			      			<small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
-							echo $message_display;
-							} ?></small>
-			    	</div>
-		    	</div>
-		    </div>
 	    	<div class="form-group">
 	      		<input type="file" class="form-control" placeholder="File" name="featured" required>
 	    	</div>
 	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
-	    		<input type="reset" class="btn btn-default" value="Reset">
-	    		<a href="<?php echo base_url() ?>index.php/">Login</a>
 
 	    	</center>
 	  	</form>
