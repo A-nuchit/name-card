@@ -89,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    	</div>
 	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
 	    		<input type="reset" class="btn btn-default" value="Reset">
-	    		<a href="<?php echo base_url() ?>index.php/">Login</a>
+	    		<a href="<?php echo base_url() ?>index.php/welcome/login_form/">Login</a>
 
 	    	</center>
 	  	</form>

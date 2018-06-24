@@ -50,11 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    		<div class="col">
 			    	<div class="form-group">
 			      		<input type="password" class="form-control" placeholder="password" name="password" required>
+                <small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
+                echo $message_display;
+              } ?></small>
 			    	</div>
 		    	</div>
 		    </div>
 	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
-	    	<a href="<?php echo base_url() ?>index.php/welcome/register"> SignUp</a>
+	    	<a href="<?php echo base_url() ?>index.php/welcome/register_form"> SignUp</a>
 	    	</center>
 	  	</form>
 	  </div>

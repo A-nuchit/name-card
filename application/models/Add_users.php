@@ -31,7 +31,19 @@ class Add_users extends CI_Model
 			return false;
 		}
 	}
-	
-}
+	public function read_user_information($username) {
+		$condition = "name =" . "'" . $username . "'";
+		$this->db->select('*');
+		$this->db->from('member');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
 
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+			return false;
+	}
+}
+}
 ?>

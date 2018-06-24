@@ -13,7 +13,8 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('Login_form');
+		echo "Show";
+		#$this->load->view('');
 	}
 	public function show_table()
 	{
@@ -21,18 +22,43 @@ class Welcome extends CI_Controller {
 		$data ['query'] = $this->Get_infos->get_info();
 		$this->load->view('Show_table',$data);
 	}
-	public function register(){
+	public function register_form(){
 		$this->load->view('welcome_message');
 	}
+	public function login_form(){
+		$this->load->view('Login_form');
+	}
 	public function login(){
+		$this->form_validation->set_rules('name', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				$this->load->view('Admin_page');
+			}else{
+				$this->load->view('Login_form');
+			}
+		} else {
 			$data = array(
 				'name' => $this->input->post('name'),
 				'password' => $this->input->post('password')
 				);
 			 if($this->Add_users->login_user($data)){
-			 	
+			 	echo $data['name'];
+			 	$result = $this->Add_users->read_user_information($data['name']);
+			 	$session_data = array(
+										'name' => $result[0]->name,
+										'email' => $result[0]->email,
+										);
+				$this->session->set_userdata('logged_in', $session_data);
+				$this->load->view('Admin_page');
+			 }
+			 else{
+			 	$data['message_display'] = 'Password dont ';
+				$this->load->view('Login_form',$data);
+
 			 }
 		}
+	}
 	public function add_user()
 	{
 		$config['upload_path'] = 'assets/images/';
@@ -51,7 +77,6 @@ class Welcome extends CI_Controller {
 			$errors = $this->upload->display_errors();
 			echo $errors;
  		}
-
 		$name = $this->input->post('name');
 		$lastname = $this->input->post('lastname');
 		$email = $this->input->post('email');
@@ -78,7 +103,6 @@ class Welcome extends CI_Controller {
 				}
 				else
 				{
-					echo "debug3";
 					$this->load->view('welcome_message');
 				}
 			}
@@ -88,4 +112,15 @@ class Welcome extends CI_Controller {
 		$this->load->view('Alertx');
 		}
 	}
+	public function logout() {
+
+// Removing session data
+		$sess_array = array(
+			'name' => ''
+				);
+		$this->session->unset_userdata('logged_in', $sess_array);
+		//$data['message_display'] = 'Successfully Logout';
+		$this->load->view('Login_form');
+	}
+
 }
