@@ -8,6 +8,8 @@ class Welcome extends CI_Controller {
 		$this->load->model('Email');
 		$this->load->library('form_validation');
 		$this->load->library('session');
+		$this->load->model('Get_infos');
+		$this->load->model('Accept_users');
 	}
 	
 
@@ -18,9 +20,18 @@ class Welcome extends CI_Controller {
 	}
 	public function show_table()
 	{
-		$this->load->model('Get_infos');
 		$data ['query'] = $this->Get_infos->get_info();
 		$this->load->view('Show_table',$data);
+	}
+	public function check_request(){
+		$data ['query'] = $this->Get_infos->get_request();
+		$this->load->view('Check_requests',$data);
+	}
+	public function accept_users(){
+		$id = $this->input->get('id');
+		$this->Accept_users->accept_user($id);
+		$data ['query'] = $this->Get_infos->get_request();
+		$this->load->view('Check_requests',$data);
 	}
 	public function register_form(){
 		$this->load->view('welcome_message');
@@ -84,8 +95,12 @@ class Welcome extends CI_Controller {
 		$pass = $this->input->post('password');
 		$c_pass = $this->input->post('confirm-password');
 		$this->load->model('Check_mails');
-		if($this->Check_mails->check($email))
+		$check_mail = $this->Check_mails->check_email($email);
+		$check_name = $this->Check_mails->check_name($name);
+		if( $check_mail == TRUE && $check_name == TRUE )
 		{
+			echo "2";
+			echo $check_mail;
 			if($pass != $c_pass){
 				$data['message_display'] = 'Password dont math!';
 				$this->load->view('welcome_message',$data);
@@ -96,20 +111,26 @@ class Welcome extends CI_Controller {
 			}
 			else{
 			$pass = password_hash($pass, PASSWORD_DEFAULT);
-			$data = array('name' => $name,'lastname' => $lastname,'password'=> $pass, 'email' => $email, 'tel'=> $tel, 'pic'=>$pic );
+			$data = array('pre_name' => $name,'pre_lastname' => $lastname,'pre_password'=> $pass, 'pre_email' => $email, 'pre_tel'=> $tel, 'pre_pic'=>$pic );
 				if($this->Add_users->add($data) && $this->Email->sent_email($name,$lastname,$email,$tel))
 				{
 					$this->load->view('Login_form');
 				}
 				else
 				{
+
 					$this->load->view('welcome_message');
 				}
 			}
 		}else
 		{
-		$this->load->view('welcome_message');
-		$this->load->view('Alertx');
+			$this->load->view('welcome_message');
+			if($check_name != TRUE){
+				$this->load->view('Alertx');
+			}
+			if($check_mail != TRUE){
+				$this->load->view('Alert_name');
+			}
 		}
 	}
 	public function logout() {
