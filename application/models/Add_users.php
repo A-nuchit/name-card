@@ -23,9 +23,14 @@ class Add_users extends CI_Model
 		$this->db->where("name","$username");
 		$query = $this->db->get();
 		$record=$query->row();
-		$password_hash = $record->password;
-		if (password_verify ( $password , $password_hash )){
-			return true;
+		if(!empty($record->password)){
+			$password_hash = $record->password;
+			if (password_verify ( $password , $password_hash )){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else{
 			return false;

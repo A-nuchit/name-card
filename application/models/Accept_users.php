@@ -18,11 +18,7 @@ class Accept_users extends CI_Model
 			}
 		}
 		$this->db->set($data);
-		if($this->db->insert('member',$data)){
-			echo "sucess";
-		}
-
-	
+		$this->db->insert('member',$data);
 	}
 }
 ?>

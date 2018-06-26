@@ -10,28 +10,13 @@ class Welcome extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('Get_infos');
 		$this->load->model('Accept_users');
+		$this->load->model('Insert_post');
+		$this->load->model('Del_users');
 	}
-	
-
 	public function index()
 	{
-		echo "Show";
-		#$this->load->view('');
-	}
-	public function show_table()
-	{
-		$data ['query'] = $this->Get_infos->get_info();
-		$this->load->view('Show_table',$data);
-	}
-	public function check_request(){
-		$data ['query'] = $this->Get_infos->get_request();
-		$this->load->view('Check_requests',$data);
-	}
-	public function accept_users(){
-		$id = $this->input->get('id');
-		$this->Accept_users->accept_user($id);
-		$data ['query'] = $this->Get_infos->get_request();
-		$this->load->view('Check_requests',$data);
+		$data ['query'] = $this->Get_infos->get_post();
+		$this->load->view('Show_post',$data);
 	}
 	public function register_form(){
 		$this->load->view('welcome_message');
@@ -39,12 +24,45 @@ class Welcome extends CI_Controller {
 	public function login_form(){
 		$this->load->view('Login_form');
 	}
+	public function home(){
+		$this->load->view('Admin_page');
+		$this->load->view('Insertpost_form');
+	}
+	public function show_table()
+	{
+		$data ['query'] = $this->Get_infos->get_info();
+		$this->load->view('Show_table',$data);
+	}
+	public function show_request(){
+		$data ['query'] = $this->Get_infos->get_request();
+		$this->load->view('Show_requests',$data);
+	}
+	public function show_member(){
+		$data ['query'] = $this->Get_infos->get_member();
+		$this->load->view('Show_member',$data);
+	}
+	public function accept_users(){
+		$id = $this->input->get('id');
+		$this->Del_users->del_user($id);
+		$data ['query'] = $this->Get_infos->get_member();
+		$this->load->view('Show_member',$data);
+	}
+
 	public function login(){
 		$this->form_validation->set_rules('name', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if(isset($this->session->userdata['logged_in'])){
-				$this->load->view('Admin_page');
+				if($this->session->userdata['logged_in']['name'] == "admin"){
+					$this->load->view('Admin_page');
+					$this->load->view('Insertpost_form');
+				}
+
+				else{
+					$this->load->view('Guest_page');
+					$this->load->view('Insertpost_form');
+
+				}
 			}else{
 				$this->load->view('Login_form');
 			}
@@ -54,24 +72,59 @@ class Welcome extends CI_Controller {
 				'password' => $this->input->post('password')
 				);
 			 if($this->Add_users->login_user($data)){
-			 	echo $data['name'];
 			 	$result = $this->Add_users->read_user_information($data['name']);
 			 	$session_data = array(
 										'name' => $result[0]->name,
 										'email' => $result[0]->email,
 										);
 				$this->session->set_userdata('logged_in', $session_data);
-				$this->load->view('Admin_page');
+				if($this->session->userdata['logged_in']['name'] == "admin"){
+					$this->load->view('Admin_page');
+					$this->load->view('Insertpost_form');
+				}
+
+				else{
+					$this->load->view('Guest_page');
+					$this->load->view('Insertpost_form');
+				}
 			 }
 			 else{
-			 	$data['message_display'] = 'Password dont ';
+			 	$data['message_display'] = 'Name or Password dont ';
 				$this->load->view('Login_form',$data);
-
 			 }
+		}
+	}
+	public function add_post(){
+		$config['upload_path'] = 'assets/images/';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$config['max_size'] = '1024';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '1024';
+		$config['remove_spaces'] = TRUE;
+		$config['file_name'] = $_FILES['featured']['name'];
+
+		$this->load->library("upload",$config);
+		if ($this->upload->do_upload('featured')) {
+			$uploadData = $this->upload->data();
+			$pic = $uploadData['file_name'];
+		} else {
+			$errors = $this->upload->display_errors();
+			echo $errors;
+ 		}
+
+		$title = $this->input->post('title');
+		$content = $this->input->post('content');
+		$type = $this->input->post('type');
+		$time = date("Y-m-d h:i:sa");
+
+		$data = array('title' => $title,'content' => $content,'type'=> $type, 'time' => $time, 'pic'=>$pic ,'name'=> $this->session->userdata['logged_in']['name'] );
+		if($this->Insert_post->add_post($data)){
+			$this->load->view('Guest_page');
 		}
 	}
 	public function add_user()
 	{
+
 		$config['upload_path'] = 'assets/images/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['max_size'] = '1024';
@@ -126,22 +179,19 @@ class Welcome extends CI_Controller {
 		{
 			$this->load->view('welcome_message');
 			if($check_name != TRUE){
-				$this->load->view('Alertx');
+				$this->load->view('Alert_name');
 			}
 			if($check_mail != TRUE){
-				$this->load->view('Alert_name');
+				$this->load->view('Alertx');
 			}
 		}
 	}
 	public function logout() {
-
-// Removing session data
 		$sess_array = array(
-			'name' => ''
+			'name' => '',
+			'email' => ''
 				);
 		$this->session->unset_userdata('logged_in', $sess_array);
-		//$data['message_display'] = 'Successfully Logout';
 		$this->load->view('Login_form');
 	}
-
 }

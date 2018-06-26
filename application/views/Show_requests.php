@@ -31,9 +31,10 @@
   }
 
 
-  </style>
+</style>
 </head>
 <body>
+	<a href="<?php echo base_url() ?>index.php/welcome/home"> home </a>
 	<?php if (isset($query)): ?>
 	<table class="table table-hover">
 		<thead class="thead-dark">
