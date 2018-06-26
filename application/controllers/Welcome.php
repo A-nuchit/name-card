@@ -11,7 +11,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('Get_infos');
 		$this->load->model('Accept_users');
 		$this->load->model('Insert_post');
-		$this->load->model('Del_users');
+		$this->load->model('Del');
 	}
 	public function index()
 	{
@@ -41,12 +41,29 @@ class Welcome extends CI_Controller {
 		$data ['query'] = $this->Get_infos->get_member();
 		$this->load->view('Show_member',$data);
 	}
+	public function show_listposts(){
+		$data ['query'] = $this->Get_infos->get_post();
+		$this->load->view('Show_listpost',$data);
+	}
 	public function accept_users(){
 		$id = $this->input->get('id');
-		$this->Del_users->del_user($id);
+		$this->Accept_users->accept_user($id);
+		$data ['query'] = $this->Get_infos->get_request();
+		$this->load->view('Show_requests',$data);
+	}
+	public function del_users(){
+		$id = $this->input->get('id');
+		$this->Del->del_user($id);
 		$data ['query'] = $this->Get_infos->get_member();
 		$this->load->view('Show_member',$data);
 	}
+	public function del_post(){
+		$id = $this->input->get('id');
+		$this->Del->del_post($id);
+		$data ['query'] = $this->Get_infos->get_post();
+		$this->load->view('Show_listpost',$data);
+	}
+	
 
 	public function login(){
 		$this->form_validation->set_rules('name', 'Username', 'required');
@@ -119,7 +136,13 @@ class Welcome extends CI_Controller {
 
 		$data = array('title' => $title,'content' => $content,'type'=> $type, 'time' => $time, 'pic'=>$pic ,'name'=> $this->session->userdata['logged_in']['name'] );
 		if($this->Insert_post->add_post($data)){
-			$this->load->view('Guest_page');
+			if($this->session->userdata['logged_in']['name'] == "admin"){
+				$this->load->view('Admin_page');
+			}
+			else{
+				$this->load->view('Guest_page');
+				$this->load->view('Insertpost_form');
+			}
 		}
 	}
 	public function add_user()

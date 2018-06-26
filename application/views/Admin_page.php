@@ -38,35 +38,34 @@ if (isset($this->session->userdata['logged_in'])) {
   </style>
 </head>
 
-<body class="bg-1">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/home/">Navbar</a>
-  		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class="nav-item active">
-        		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_request/">Check_requests</a>
-      		</li>
-      		<li class="nav-item active">
-        		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">member</a>
-      		</li>
-      		<li class="nav-item active">
-        		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">Show post</a>
-      		</li>
-      		<li class="nav-item active">
-        		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">List post</a>
-      		</li>
-    	</ul>
-    	<form class="form-inline my-2 my-lg-0">
-    		<a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $name ?></a>
-      		<a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
-    	</form>
-  		</div>
-	</nav>
-<div id="profile">
-<?php
+  <body class="bg-1">
+  	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/home/">Navbar</a>
+    		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        		<li class="nav-item active">
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_request/">Check_requests</a>
+        		</li>
+        		<li class="nav-item active">
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">member</a>
+        		</li>
+        		<li class="nav-item active">
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">Show post</a>
+        		</li>
+        		<li class="nav-item active">
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_listposts">List post</a>
+        		</li>
+      	</ul>
+      	<form class="form-inline my-2 my-lg-0">
+      		<a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $name ?></a>
+        		<a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
+      	</form>
+    		</div>
+  	</nav>
+    <div id="profile">
+    <?php
 
-?>
-</div>
-<br/>
-</body>
+    ?>
+    </div><br/>
+  </body>
 </html>

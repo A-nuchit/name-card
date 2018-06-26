@@ -39,21 +39,21 @@
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-				<th><center>ชื่อ</center></th>
-				<th><center>นามสกุล</center></th>
-				<th><center>E-mail</center></th>
-				<th><center>เบอร์โทรศัพท์</center></th>
-				<th><center>button</center></th>
+				<th><center>Tital</center></th>
+				<th><center>Time</center></th>
+				<th><center>name</center></th>
+				<th><center>Type</center></th>
+				<th><center>Button</center></th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach($query as $r):?>
 				<tr align="center">
+					<td><?php echo $r->title; ?></td>
+					<td><?php echo $r->time; ?></td>
 					<td><?php echo $r->name; ?></td>
-					<td><?php echo $r->lastname; ?></td>
-					<td><?php echo $r->email; ?></td>
-					<td><?php echo $r->tel; ?></td>
-					<td><a href="<?php echo base_url() ?>index.php/welcome/del_users?id=<?php echo $r->id ?>">Del</a></td>
+					<td><?php echo $r->type; ?></td>
+					<td><a href="<?php echo base_url() ?>index.php/welcome/del_post?id=<?php echo $r->post_id ?>">Del</a></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
