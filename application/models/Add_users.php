@@ -4,7 +4,7 @@ class Add_users extends CI_Model
 	public function add($data)
 	{	$this->load->database();
 		$this->db->set($data);
-		$count = $this->db->insert('pre_member',$data);
+		$count = $this->db->insert('member',$data);
 		if($count>0)
 		{
 			return true;
@@ -16,11 +16,11 @@ class Add_users extends CI_Model
 	}
 	public function login_user($data){
 		$this->load->database();
-		$username = $data['name'];
+		$username = $data['username'];
 		$password = $data['password'];
 		$this->db->select('password');
 		$this->db->from('member');
-		$this->db->where("name","$username");
+		$this->db->where("username","$username");
 		$query = $this->db->get();
 		$record=$query->row();
 		if(!empty($record->password)){
@@ -37,7 +37,7 @@ class Add_users extends CI_Model
 		}
 	}
 	public function read_user_information($username) {
-		$condition = "name =" . "'" . $username . "'";
+		$condition = "username =" . "'" . $username . "'";
 		$this->db->select('*');
 		$this->db->from('member');
 		$this->db->where($condition);

@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  		<div class="row">
 	  			<div class="col">
 		    		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="ชื่อ" name="name" required>
+		      			<input type="text" class="form-control" placeholder="Username" name="username" required>
 		    		</div>
 		    	</div>
 	    	</div>

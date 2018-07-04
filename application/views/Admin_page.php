@@ -2,7 +2,7 @@
 
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-	$name = ($this->session->userdata['logged_in']['name']);
+	$username = ($this->session->userdata['logged_in']['username']);
 	$email = ($this->session->userdata['logged_in']['email']);
 } else {
 	header("location: login_form");
@@ -44,20 +44,17 @@ if (isset($this->session->userdata['logged_in'])) {
     		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         		<li class="nav-item active">
-          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_request/">Check_requests</a>
-        		</li>
-        		<li class="nav-item active">
           		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">member</a>
         		</li>
         		<li class="nav-item active">
           		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">Show post</a>
         		</li>
         		<li class="nav-item active">
-          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_listposts">List post</a>
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_listcards">List card</a>
         		</li>
       	</ul>
       	<form class="form-inline my-2 my-lg-0">
-      		<a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $name ?></a>
+      		<a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $username ?></a>
         		<a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
       	</form>
     		</div>

@@ -1,10 +1,10 @@
 <?php
-class Insert_post extends CI_Model
+class Insert_card extends CI_Model
 {   
-	public function add_post($data)
+	public function add_card($data)
 	{	$this->load->database();
 		$this->db->set($data);
-		$count = $this->db->insert('post',$data);
+		$count = $this->db->insert('card',$data);
 		if($count>0)
 		{
 			return true;

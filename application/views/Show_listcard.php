@@ -39,21 +39,25 @@
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-				<th><center>Tital</center></th>
-				<th><center>Time</center></th>
-				<th><center>name</center></th>
-				<th><center>Type</center></th>
+				<th><center>card_id</center></th>
+				<th><center>Username</center></th>
+				<th><center>topic</center></th>
+				<th><center>detail</center></th>
+				<th><center>Type Time</center></th>
+				<th><center>Type Job</center></th>
 				<th><center>Button</center></th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach($query as $r):?>
 				<tr align="center">
-					<td><?php echo $r->title; ?></td>
-					<td><?php echo $r->time; ?></td>
-					<td><?php echo $r->name; ?></td>
-					<td><?php echo $r->type; ?></td>
-					<td><a href="<?php echo base_url() ?>index.php/welcome/del_post?id=<?php echo $r->post_id ?>">Del</a></td>
+					<td><?php echo $r->card_id; ?></td>
+					<td><?php echo $r->username; ?></td>
+					<td><?php echo $r->topic; ?></td>
+					<td><?php echo $r->detail; ?></td>
+					<td><?php echo $r->type_time; ?></td>
+					<td><?php echo $r->nametype; ?></td>
+					<td><a href="<?php echo base_url() ?>index.php/welcome/del_card?card_id=<?php echo $r->card_id ?>">Del</a></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>

@@ -39,8 +39,9 @@
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-				<th><center>ชื่อ</center></th>
-				<th><center>นามสกุล</center></th>
+				<th><center>username</center></th>
+				<th><center>name</center></th>
+				<th><center>last</center></th>
 				<th><center>E-mail</center></th>
 				<th><center>เบอร์โทรศัพท์</center></th>
 				<th><center>button</center></th>
@@ -49,15 +50,18 @@
 		<tbody>
 			<?php foreach($query as $r):?>
 				<tr align="center">
+					<td><?php echo $r->username; ?></td>
 					<td><?php echo $r->name; ?></td>
 					<td><?php echo $r->lastname; ?></td>
 					<td><?php echo $r->email; ?></td>
 					<td><?php echo $r->tel; ?></td>
-					<td><a href="<?php echo base_url() ?>index.php/welcome/del_users?id=<?php echo $r->id ?>">Del</a></td>
+					<?php if($r->username != "admin"){ ?>
+					<td><a href="<?php echo base_url() ?>index.php/welcome/del_users?id=<?php echo $r->user_id ?>">Del</a></td>
+				<?php } ?>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-<?php endif; ?>
+	<?php endif; ?>
 </body>
 </html>

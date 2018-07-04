@@ -10,7 +10,7 @@
             <div class="form-group <?php echo (!empty($content_err)) ? 'has-error' : ''; ?>">
                 <textarea rows= "5" type="text" name="content" placeholder="Content" class="form-control" required></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group">`
                 <label class="mr-sm-2" style="color: #707070;">Type post</label>
                 <select id="inputState" class="form-control" name="type">
                 <option selected>Choose...</option>

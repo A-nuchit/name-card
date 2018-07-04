@@ -10,13 +10,25 @@ class Welcome extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('Get_infos');
 		$this->load->model('Accept_users');
-		$this->load->model('Insert_post');
+		$this->load->model('Insert_card');
 		$this->load->model('Del');
 	}
-	public function index()
-	{
-		$data ['query'] = $this->Get_infos->get_post();
-		$this->load->view('Show_post',$data);
+	public function index(){
+		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Search',$data);
+	}
+	public function searchs(){
+		$info = array(
+				'nametype' => $this->input->post('type_job'),
+				'word' => $this->input->post('word')
+				);
+		$data_search ['query'] = $this->Get_infos->get_search($info);
+		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Search',$data);
+		$this->load->view('Show_card',$data_search);
+
 	}
 	public function register_form(){
 		$this->load->view('welcome_message');
@@ -26,50 +38,26 @@ class Welcome extends CI_Controller {
 	}
 	public function home(){
 		$this->load->view('Admin_page');
-		$this->load->view('Insertpost_form');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Addcard_form',$data);
 	}
-	public function show_table()
-	{
+	public function show_table(){
 		$data ['query'] = $this->Get_infos->get_info();
 		$this->load->view('Show_table',$data);
 	}
-	public function show_request(){
-		$this->form_validation->set_rules('name', 'Username', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		if ($this->form_validation->run() == FALSE) {
-			if(isset($this->session->userdata['logged_in'])){
-				if($this->session->userdata['logged_in']['name'] == "admin"){
-					$data ['query'] = $this->Get_infos->get_request();
-					$this->load->view('Show_requests',$data);
-				}
-
-				else{
-					$this->load->view('Guest_page');
-					$this->load->view('Insertpost_form');
-
-				}
-			}else{
-				$this->load->view('Login_form');
-			}
-		}
-		else{
-			$this->load->view('Login_form');
-		}
-
-	}
 	public function show_member(){
-		$this->form_validation->set_rules('name', 'Username', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if(isset($this->session->userdata['logged_in'])){
-				if($this->session->userdata['logged_in']['name'] == "admin"){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$data ['query'] = $this->Get_infos->get_member();
 					$this->load->view('Show_member',$data);
 				}
-
 				else{
-					$this->load->view('Guest_page');
-					$this->load->view('Insertpost_form');
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 
 				}
 			}else{
@@ -80,19 +68,20 @@ class Welcome extends CI_Controller {
 			$this->load->view('Login_form');
 		}
 	}
-	public function show_listposts(){
-		$this->form_validation->set_rules('name', 'Username', 'required');
+	public function show_listcards(){
+		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if(isset($this->session->userdata['logged_in'])){
-				if($this->session->userdata['logged_in']['name'] == "admin"){
-					$data ['query'] = $this->Get_infos->get_post();
-					$this->load->view('Show_listpost',$data);
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+					$data ['query'] = $this->Get_infos->get_card();
+					$this->load->view('Show_listcard',$data);
 				}
 
 				else{
-					$this->load->view('Guest_page');
-					$this->load->view('Insertpost_form');
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 
 				}
 			}else{
@@ -103,39 +92,35 @@ class Welcome extends CI_Controller {
 			$this->load->view('Login_form');
 		}
 	}
-	public function accept_users(){
-		$id = $this->input->get('id');
-		$this->Accept_users->accept_user($id);
-		$data ['query'] = $this->Get_infos->get_request();
-		$this->load->view('Show_requests',$data);
-	}
 	public function del_users(){
-		$id = $this->input->get('id');
-		$this->Del->del_user($id);
+		$user_id = $this->input->get('user_id');
+		$this->Del->del_user($user_id);
 		$data ['query'] = $this->Get_infos->get_member();
 		$this->load->view('Show_member',$data);
 	}
-	public function del_post(){
-		$id = $this->input->get('id');
-		$this->Del->del_post($id);
-		$data ['query'] = $this->Get_infos->get_post();
-		$this->load->view('Show_listpost',$data);
+	public function del_card(){
+		$card_id = $this->input->get('card_id');
+		$this->Del->del_card($card_id);
+		$data ['query'] = $this->Get_infos->get_card();
+		$this->load->view('Show_listcard',$data);
 	}
 	
 
 	public function login(){
-		$this->form_validation->set_rules('name', 'Username', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if(isset($this->session->userdata['logged_in'])){
-				if($this->session->userdata['logged_in']['name'] == "admin"){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$this->load->view('Admin_page');
-					$this->load->view('Insertpost_form');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 				}
 
 				else{
-					$this->load->view('Guest_page');
-					$this->load->view('Insertpost_form');
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 
 				}
 			}else{
@@ -143,24 +128,27 @@ class Welcome extends CI_Controller {
 			}
 		} else {
 			$data = array(
-				'name' => $this->input->post('name'),
+				'username' => $this->input->post('username'),
 				'password' => $this->input->post('password')
 				);
 			 if($this->Add_users->login_user($data)){
-			 	$result = $this->Add_users->read_user_information($data['name']);
+			 	$result = $this->Add_users->read_user_information($data['username']);
 			 	$session_data = array(
-										'name' => $result[0]->name,
+			 							'user_id' => $result[0]->user_id,
+										'username' => $result[0]->username,
 										'email' => $result[0]->email,
 										);
 				$this->session->set_userdata('logged_in', $session_data);
-				if($this->session->userdata['logged_in']['name'] == "admin"){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$this->load->view('Admin_page');
-					$this->load->view('Insertpost_form');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 				}
 
 				else{
-					$this->load->view('Guest_page');
-					$this->load->view('Insertpost_form');
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
 				}
 			 }
 			 else{
@@ -169,64 +157,60 @@ class Welcome extends CI_Controller {
 			 }
 		}
 	}
-	public function add_post(){
-
-		$config['upload_path'] = 'assets/images/';
-		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['remove_spaces'] = TRUE;
-		$config['file_name'] = $_FILES['featured']['name'];
-
-		$this->load->library("upload",$config);
-		if ($this->upload->do_upload('featured')) {
-			$uploadData = $this->upload->data();
-			$pic = $uploadData['file_name'];
-		} else {
-			$errors = $this->upload->display_errors();
-			echo $errors;
- 		}
-
-		$title = $this->input->post('title');
-		$content = $this->input->post('content');
-		$type = $this->input->post('type');
+	public function add_card(){
+		$topic = $this->input->post('topic');
+		$detail = $this->input->post('detail');
+		$type_id = $this->input->post('type_job');
+		$type_time = $this->input->post('type_time');
 		$time = date("Y-m-d h:i:sa");
-
-		$data = array('title' => $title,'content' => $content,'type'=> $type, 'time' => $time, 'pic'=>$pic ,'name'=> $this->session->userdata['logged_in']['name'] );
-		if($this->Insert_post->add_post($data)){
-			if($this->session->userdata['logged_in']['name'] == "admin"){
+		echo $type_id;
+		echo "string";
+		$data = array(  'topic' => $topic,
+						'detail' => $detail,
+						'type_time'=> $type_time,
+						'type_id'=> $type_id,
+						'time' => $time,
+						'user_id'=> $this->session->userdata['logged_in']['user_id'] );
+		if($this->Insert_card->add_card($data)){
+			if($this->session->userdata['logged_in']['username'] == "admin"){
 				$this->load->view('Admin_page');
+				$data ['query'] = $this->Get_infos->get_job();
+				$this->load->view('Addcard_form',$data);
 			}
 			else{
-				$this->load->view('Guest_page');
-				$this->load->view('Insertpost_form');
+				$this->load->view('Navbar');
+				$data ['query'] = $this->Get_infos->get_job();
+				$this->load->view('Addcard_form',$data);
 			}
 		}
 	}
 	public function add_user()
 	{
+		$username = $this->input->post('username');
 		$name = $this->input->post('name');
 		$config['upload_path'] = 'assets/images/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['remove_spaces'] = TRUE;
-		$config['file_name'] = $name;
+		$config['file_name'] = $username;
 		$this->load->library("upload",$config);
-		if ($this->upload->do_upload('featured')) {
-			$uploadData = $this->upload->data();
-			$pic = $uploadData['file_name'];
-		} else {
-			$errors = $this->upload->display_errors();
-			echo $errors;
- 		}
+		$this->load->model('Check_mails');
 		$lastname = $this->input->post('lastname');
 		$email = $this->input->post('email');
 		$tel = $this->input->post('tel');
+		$gender = $this->input->post('gender');
+		$day = $this->input->post('day');
+		$month = $this->input->post('month');
+		$year = $this->input->post('year');
 		$pass = $this->input->post('password');
 		$c_pass = $this->input->post('confirm-password');
-		$this->load->model('Check_mails');
 		$check_mail = $this->Check_mails->check_email($email);
-		$check_name = $this->Check_mails->check_name($name);
-		if( $check_mail == TRUE && $check_name == TRUE )
+		$check_username = $this->Check_mails->check_name($username);
+		$check_pic = $this->upload->do_upload('featured');
+		if( $check_mail == TRUE && $check_username == TRUE && $check_pic == TRUE )
 		{
-			echo $check_mail;
+			$uploadData = $this->upload->data();
+			$pic = $uploadData['file_name'];
+
 			if($pass != $c_pass){
 				$data['message_display'] = 'Password dont math!';
 				$this->load->view('welcome_message',$data);
@@ -237,7 +221,18 @@ class Welcome extends CI_Controller {
 			}
 			else{
 			$pass = password_hash($pass, PASSWORD_DEFAULT);
-			$data = array('pre_name' => $name,'pre_lastname' => $lastname,'pre_password'=> $pass, 'pre_email' => $email, 'pre_tel'=> $tel, 'pre_pic'=>$pic );
+			$data = array('username' => $username,
+						  'name' => $name,
+						  'lastname' => $lastname,
+						  'password'=> $pass,
+						  'pic'=>$pic,
+						  'email' => $email,
+						  'tel'=> $tel,
+						  'gender' => $gender,
+						  'day'=>$day,
+						  'month'=>$month,
+						  'year'=>$year
+						);
 				if($this->Add_users->add($data) && $this->Email->sent_email($name,$lastname,$email,$tel))
 				{
 					$this->load->view('Login_form');
@@ -257,6 +252,9 @@ class Welcome extends CI_Controller {
 			if($check_mail != TRUE){
 				$this->load->view('Alertx');
 			}
+			if($check_pic != TRUE){
+				echo "pic error";
+			}
 		}
 	}
 	public function logout() {
@@ -265,6 +263,8 @@ class Welcome extends CI_Controller {
 			'email' => ''
 				);
 		$this->session->unset_userdata('logged_in', $sess_array);
-		$this->load->view('Login_form');
+		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Search',$data);
 	}
 }
