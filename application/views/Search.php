@@ -13,7 +13,7 @@
 			            <?php endforeach; ?>
 		            </select>
         	</div>
-              <input type="text" class="form-control" name="word" required>
+              <input type="text" class="form-control" name="word" >
               <center>
               	<button type="submit" class="btn btn-outline-light" style="margin-top: 15px ">Search</button>
               </center>

@@ -28,6 +28,9 @@
   {
     padding-top: 10%;
   }
+  form{
+    margin-bottom: 0;
+  }
   </style>
 </head>
 <?php
@@ -36,21 +39,21 @@ if (isset($this->session->userdata['logged_in'])) {
   $email = ($this->session->userdata['logged_in']['email']); ?>
   <body class="bg-1">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/home/">Navbar</a>
+         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/index">Navbar</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">Profile</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">Show my post</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">Show my card</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/searchs">Search</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome">Search</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $username ?></a>
+          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/index" >Wellcome , <?php echo $username ?></a>
             <a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
         </form>
         </div>
@@ -65,15 +68,15 @@ if (isset($this->session->userdata['logged_in'])) {
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
         <?php echo form_open_multipart('welcome/login'); ?>
-        <form class="form-inline">
+        <form>
           <div class="row">
-            <div class="col">
+            <div class="col-5">
               <input type="text" class="form-control" placeholder="Username" name="username" required>
             </div>
-            <div class="col">
+            <div class="col-5">
               <input type="password" class="form-control" placeholder="password" name="password" required>
                   </div>
-            <div class="col">
+            <div class="col-2">
               <button type="submit" class="btn btn-outline-secondary">Login</button>
             </div>
           </div>

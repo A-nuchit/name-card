@@ -55,7 +55,12 @@
 					<td><?php echo $r->username; ?></td>
 					<td><?php echo $r->topic; ?></td>
 					<td><?php echo $r->detail; ?></td>
-					<td><?php echo $r->type_time; ?></td>
+					<td><?php if($r->type_job == 1){
+								echo "Fulltime";
+								}
+								else{
+									echo "Parttime";
+								}?></td>
 					<td><?php echo $r->nametype; ?></td>
 					<td><a href="<?php echo base_url() ?>index.php/welcome/del_card?card_id=<?php echo $r->card_id ?>">Del</a></td>
 				</tr>

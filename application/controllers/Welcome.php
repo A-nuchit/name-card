@@ -12,12 +12,17 @@ class Welcome extends CI_Controller {
 		$this->load->model('Accept_users');
 		$this->load->model('Insert_card');
 		$this->load->model('Del');
+		$this->load->model('Create_table');
 	}
 	public function index(){
 		$this->load->view('Navbar');
 		$data ['query'] = $this->Get_infos->get_job();
 		$this->load->view('Search',$data);
 	}
+	public function testb(){
+		$this->load->view('testb');
+	}
+
 	public function searchs(){
 		$info = array(
 				'nametype' => $this->input->post('type_job'),
@@ -30,6 +35,11 @@ class Welcome extends CI_Controller {
 		$this->load->view('Show_card',$data_search);
 
 	}
+	public function save_card(){
+		$card_id = $this->input->get('card_id');
+		$data = array('card_id' => $card_id);
+		$this->Add_users->add_like($data);
+	}
 	public function register_form(){
 		$this->load->view('welcome_message');
 	}
@@ -41,6 +51,18 @@ class Welcome extends CI_Controller {
 		$data ['query'] = $this->Get_infos->get_job();
 		$this->load->view('Addcard_form',$data);
 	}
+	public function Show_card_admin(){
+		$this->load->view('Admin_page');
+		$data ['query'] = $this->Get_infos->get_card();
+		$this->load->view('Show_card',$data);
+	}
+	public function Show_mycard(){
+		$this->load->view('Navbar');
+		$username = $this->session->userdata['logged_in']['username'];
+		$data ['query'] = $this->Get_infos->get_mycard($username);
+		$this->load->view('Show_card',$data);
+	}
+
 	public function show_table(){
 		$data ['query'] = $this->Get_infos->get_info();
 		$this->load->view('Show_table',$data);
@@ -160,15 +182,15 @@ class Welcome extends CI_Controller {
 	public function add_card(){
 		$topic = $this->input->post('topic');
 		$detail = $this->input->post('detail');
-		$type_id = $this->input->post('type_job');
-		$type_time = $this->input->post('type_time');
+		$work_id = $this->input->post('work_type');
+		$type_job = $this->input->post('type_job');
 		$time = date("Y-m-d h:i:sa");
-		echo $type_id;
+		echo $work_id;
 		echo "string";
 		$data = array(  'topic' => $topic,
 						'detail' => $detail,
-						'type_time'=> $type_time,
-						'type_id'=> $type_id,
+						'type_job'=> $type_job,
+						'work_id'=> $work_id,
 						'time' => $time,
 						'user_id'=> $this->session->userdata['logged_in']['user_id'] );
 		if($this->Insert_card->add_card($data)){
@@ -194,13 +216,16 @@ class Welcome extends CI_Controller {
 		$config['file_name'] = $username;
 		$this->load->library("upload",$config);
 		$this->load->model('Check_mails');
+			$district = $this->input->post('district');
+			$province = $this->input->post('province');
+			$zip_code = $this->input->post('zip_code');
 		$lastname = $this->input->post('lastname');
 		$email = $this->input->post('email');
 		$tel = $this->input->post('tel');
 		$gender = $this->input->post('gender');
-		$day = $this->input->post('day');
-		$month = $this->input->post('month');
-		$year = $this->input->post('year');
+		#$day = $this->input->post('day');
+		#$month = $this->input->post('month');
+		#$year = $this->input->post('year');
 		$pass = $this->input->post('password');
 		$c_pass = $this->input->post('confirm-password');
 		$check_mail = $this->Check_mails->check_email($email);
@@ -222,19 +247,20 @@ class Welcome extends CI_Controller {
 			else{
 			$pass = password_hash($pass, PASSWORD_DEFAULT);
 			$data = array('username' => $username,
+						  'district' => $district,
+						  'province' => $province,
+						  'zip_code' => $zip_code,	
 						  'name' => $name,
 						  'lastname' => $lastname,
 						  'password'=> $pass,
 						  'pic'=>$pic,
 						  'email' => $email,
 						  'tel'=> $tel,
-						  'gender' => $gender,
-						  'day'=>$day,
-						  'month'=>$month,
-						  'year'=>$year
+						  'gender' => $gender
 						);
 				if($this->Add_users->add($data) && $this->Email->sent_email($name,$lastname,$email,$tel))
 				{
+					$this->Create_table->create($username);
 					$this->load->view('Login_form');
 				}
 				else
@@ -246,7 +272,7 @@ class Welcome extends CI_Controller {
 		}else
 		{
 			$this->load->view('welcome_message');
-			if($check_name != TRUE){
+			if($check_username != TRUE){
 				$this->load->view('Alert_name');
 			}
 			if($check_mail != TRUE){

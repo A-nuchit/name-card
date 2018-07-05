@@ -47,7 +47,7 @@ if (isset($this->session->userdata['logged_in'])) {
           		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">member</a>
         		</li>
         		<li class="nav-item active">
-          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/">Show post</a>
+          		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/Show_card_admin">Show post</a>
         		</li>
         		<li class="nav-item active">
           		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_listcards">List card</a>

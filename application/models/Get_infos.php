@@ -15,24 +15,49 @@ class Get_infos extends CI_Model
 	{
 		$this->db->select('	card.card_id , 
 							member.username,
+							member.name,
+							member.lastname,
 							card.time,
 							member.email,
 							member.tel, 
 							card.user_id, 
 							card.topic,
 							card.detail,
-							card.type_time,
-							job_type.nametype '
+							card.type_job,
+							work_type.nametype '
 					);
 		$this->db->from('card');
-		$this->db->join('job_type', 'card.type_id = job_type.type_id');
+		$this->db->join('work_type', 'card.work_id = work_type.work_id');
 		$this->db->join('member', 'card.user_id = member.user_id');
 		$data = $this->db->get();
         return $data->result();
 	}
 	public function get_job()
 	{
-		$data = $this->db->get('job_type');
+		$data = $this->db->get('work_type');
+        return $data->result();
+	}
+	public function get_mycard($data)
+	{
+		$username = $data;
+
+		$this->db->select('	card.card_id ,
+							member.username,
+							member.name,
+							member.lastname,
+							member.email,
+							member.tel,
+							card.user_id, 
+							card.topic,
+							card.detail,
+							card.type_job,
+							work_type.nametype '
+					);
+		$this->db->from('card');
+		$this->db->where('username',$username);
+		$this->db->join('work_type', 'card.work_id = work_type.work_id');
+		$this->db->join('member', 'card.user_id = member.user_id');
+		$data = $this->db->get();
         return $data->result();
 	}
 	public function get_search($data)
@@ -49,15 +74,17 @@ class Get_infos extends CI_Model
 							card.user_id, 
 							card.topic,
 							card.detail,
-							card.type_time,
-							job_type.nametype '
+							card.type_job,
+							work_type.nametype '
 					);
 		$this->db->from('card');
 		if($nametype != '*'){
 			$this->db->where('nametype',$nametype);
 		}
-		$this->db->like('topic',$word);
-		$this->db->join('job_type', 'card.type_id = job_type.type_id');
+		if($word != NULL){
+			$this->db->like('topic',$word);
+		}
+		$this->db->join('work_type', 'card.work_id = work_type.work_id');
 		$this->db->join('member', 'card.user_id = member.user_id');
 		$data = $this->db->get();
         return $data->result();
