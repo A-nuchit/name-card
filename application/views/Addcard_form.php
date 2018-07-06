@@ -45,11 +45,12 @@
                     </div>
                 </div>
             </div>
+            <!---
             <div class="form-group">
                 <input type="file" class="form-control" placeholder="File" name="pic_profile" required>
                 <input type="file" class="form-control" placeholder="File" name="pic_logo" required>
                 <input type="file" class="form-control" placeholder="File" name="pic_bg" required>
-            </div>
+            </div>-->
         <center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
             <input type="reset" class="btn btn-default" value="Reset">
         </center>

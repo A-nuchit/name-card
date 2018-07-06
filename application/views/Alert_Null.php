@@ -1,0 +1,9 @@
+<body style="font-family: 'Prompt', sans-serif; ">
+	<center>
+		<div class="top" style="padding-top: 30px ">
+			<div class="alert alert-danger" role="alert" style="width: 38%">
+  				Don't have Name card.
+			</div>
+		</div>
+</center>
+</body>

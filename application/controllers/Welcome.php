@@ -28,17 +28,33 @@ class Welcome extends CI_Controller {
 				'nametype' => $this->input->post('type_job'),
 				'word' => $this->input->post('word')
 				);
-		$data_search ['query'] = $this->Get_infos->get_search($info);
-		$this->load->view('Navbar');
+		$data_search = array('query' => $this->Get_infos->get_search($info),
+							 'like_qurey' => $this->Get_infos->get_like()
+		 			  );
 		$data ['query'] = $this->Get_infos->get_job();
-		$this->load->view('Search',$data);
-		$this->load->view('Show_card',$data_search);
+		$this->load->view('Navbar');
 
+		$this->load->view('Search',$data);
+		if($data_search['query'] == NULL){
+			$this->load->view('Alert_Null');
+		}
+		$this->load->view('Show_card',$data_search);
 	}
 	public function save_card(){
 		$card_id = $this->input->get('card_id');
 		$data = array('card_id' => $card_id);
 		$this->Add_users->add_like($data);
+		$data ['query'] = $this->Get_infos->get_job();
+		$info = array(
+				'nametype' => '*',
+				'word' => ""
+				);
+		$data_search = array('query' => $this->Get_infos->get_search($info),
+							 'like_qurey' => $this->Get_infos->get_like()
+		 			  );
+		$this->load->view('Navbar');
+		$this->load->view('Search',$data);
+		$this->load->view('Show_card',$data_search);
 	}
 	public function register_form(){
 		$this->load->view('welcome_message');
@@ -59,13 +75,31 @@ class Welcome extends CI_Controller {
 	public function Show_mycard(){
 		$this->load->view('Navbar');
 		$username = $this->session->userdata['logged_in']['username'];
-		$data ['query'] = $this->Get_infos->get_mycard($username);
+		$data ['query'] = $this->Get_infos->get_mycard();
+		if($data ['query']==NULL){
+			$this->load->view('Alert_Null');
+		}
 		$this->load->view('Show_card',$data);
+	}
+	public function Show_mylike(){
+		$this->load->view('Navbar');
+		$username = $this->session->userdata['logged_in']['username'];
+		$data ['query'] = $this->Get_infos->get_mylike($username);
+		if($data ['query']==NULL){
+			$this->load->view('Alert_like');
+		}
+		$this->load->view('Show_card-like',$data);
 	}
 
 	public function show_table(){
+		$this->load->view('Navbar');
 		$data ['query'] = $this->Get_infos->get_info();
 		$this->load->view('Show_table',$data);
+	}
+	public function create_card(){
+		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Addcard_form',$data);
 	}
 	public function show_member(){
 		$this->form_validation->set_rules('username', 'Username', 'required');
@@ -126,6 +160,24 @@ class Welcome extends CI_Controller {
 		$data ['query'] = $this->Get_infos->get_card();
 		$this->load->view('Show_listcard',$data);
 	}
+	public function del_card_user(){
+		$card_id = $this->input->get('card_id');
+		$this->Del->del_card($card_id);
+		$data ['query'] = $this->Get_infos->get_mycard();
+		$this->load->view('Navbar');
+		if($data ['query']==NULL){
+			$this->load->view('Alert_Null');
+		}
+		$this->load->view('Show_card',$data);
+	}
+	public function del_card_like(){
+		$card_id = $this->input->get('card_id');
+		$this->Del->del_card_like($card_id);
+		$username = $this->session->userdata['logged_in']['username'];
+		$data ['query'] = $this->Get_infos->get_mylike($username);
+		$this->load->view('Navbar');
+		$this->load->view('Show_card-like',$data);
+	}
 	
 
 	public function login(){
@@ -184,13 +236,17 @@ class Welcome extends CI_Controller {
 		$detail = $this->input->post('detail');
 		$work_id = $this->input->post('work_type');
 		$type_job = $this->input->post('type_job');
+		$district = $this->input->post('district');
+		$province = $this->input->post('province');
+		$zip_code = $this->input->post('zip_code');
 		$time = date("Y-m-d h:i:sa");
-		echo $work_id;
-		echo "string";
 		$data = array(  'topic' => $topic,
 						'detail' => $detail,
 						'type_job'=> $type_job,
 						'work_id'=> $work_id,
+						'district' => $district,
+						'province' => $province,
+						'zip_code' => $zip_code,
 						'time' => $time,
 						'user_id'=> $this->session->userdata['logged_in']['user_id'] );
 		if($this->Insert_card->add_card($data)){

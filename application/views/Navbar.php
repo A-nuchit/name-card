@@ -26,10 +26,42 @@
   }
   .container
   {
-    padding-top: 10%;
+    padding-top: 20px;
   }
   form{
     margin-bottom: 0;
+  }
+  .border_show
+  {
+    padding: 15px 15px 15px 15px;
+    background: #fff;
+    background: #fff;
+    box-shadow: 2px 5px 7px #70707070;
+    word-wrap:break-word;
+  }
+  .container
+  {
+    padding-top: 20px;
+  }
+  name{
+    font-size: 25px;
+    color: #707070;
+  }
+  timepost{
+     font-size: 15px;
+     color: #707070;
+  }
+  contact{
+     font-size: 17px;
+     color: #606060;
+  }
+  p{
+    color: #707070;
+    font-size: 80%;
+  }
+  type{
+    font-size: 15px;
+    color: #707070;
   }
   </style>
 </head>
@@ -46,7 +78,13 @@ if (isset($this->session->userdata['logged_in'])) {
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">Profile</a>
             </li>
             <li class="nav-item active">
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/create_card">Create card</a>
+            </li>
+            <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">Show my card</a>
+            </li>
+             <li class="nav-item active">
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mylike">Show my like</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome">Search</a>
@@ -70,15 +108,19 @@ if (isset($this->session->userdata['logged_in'])) {
         <?php echo form_open_multipart('welcome/login'); ?>
         <form>
           <div class="row">
-            <div class="col-5">
+            <div class="col-4">
               <input type="text" class="form-control" placeholder="Username" name="username" required>
             </div>
-            <div class="col-5">
+            <div class="col-4">
               <input type="password" class="form-control" placeholder="password" name="password" required>
                   </div>
-            <div class="col-2">
-              <button type="submit" class="btn btn-outline-secondary">Login</button>
+            <div class="col-4">
+                  <button type="submit" class="btn btn-outline-secondary" style="width: 50%">Login</button>
+                  <a style="padding-right: 30px" href="<?php echo base_url() ?>index.php/welcome/register_form" >  SignUp</a>
+              </div>
+              
             </div>
+            
           </div>
         </form>
         </div>
