@@ -14,12 +14,24 @@ class Add_users extends CI_Model
 			return false;
 		}
 	}
+	public function add_type($data)
+	{	$this->load->database();
+		$this->db->set($data);
+		$count = $this->db->insert('work_type',$data);
+		if($count>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	public function add_like($data)
-	{	$table = $this->session->userdata['logged_in']['username']."_like";
-		
+	{
 		$this->load->database();
 		$this->db->set($data);
-		$count = $this->db->insert($table,$data);
+		$count = $this->db->insert('like',$data);
 		if($count>0)
 		{
 			return true;

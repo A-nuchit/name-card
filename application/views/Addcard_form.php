@@ -7,7 +7,6 @@
         <div class="form-group">
             <label class="mr-sm-2" style="color: #707070;">Type job</label>
             <select id="inputState" class="form-control" name="work_type">
-            <option selected>Choose...</option>
             <?php foreach($query as $r):?>
                     <option value="<?php echo $r->work_id; ?>"><?php echo $r->nametype; ?></option>
                 </tr>

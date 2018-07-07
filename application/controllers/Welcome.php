@@ -42,7 +42,9 @@ class Welcome extends CI_Controller {
 	}
 	public function save_card(){
 		$card_id = $this->input->get('card_id');
-		$data = array('card_id' => $card_id);
+		$data = array('card_id' => $card_id,
+					  'id' => $this->session->userdata['logged_in']['user_id']
+					);
 		$this->Add_users->add_like($data);
 		$data ['query'] = $this->Get_infos->get_job();
 		$info = array(
@@ -62,6 +64,20 @@ class Welcome extends CI_Controller {
 	public function login_form(){
 		$this->load->view('Login_form');
 	}
+	public function Addtype_form(){
+		$this->load->view('Admin_page');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Insert_type');
+	}
+	public function add_type(){
+		$work_type = array ('nametype' => $this->input->post('work_type'),
+							'dis_type' => $this->input->post('work_type_dis')
+						);
+		$this->Add_users->add_type($work_type);
+		$this->load->view('Admin_page');
+		$data ['query'] = $this->Get_infos->get_job();
+		$this->load->view('Insert_type');
+	}
 	public function home(){
 		$this->load->view('Admin_page');
 		$data ['query'] = $this->Get_infos->get_job();
@@ -74,7 +90,6 @@ class Welcome extends CI_Controller {
 	}
 	public function Show_mycard(){
 		$this->load->view('Navbar');
-		$username = $this->session->userdata['logged_in']['username'];
 		$data ['query'] = $this->Get_infos->get_mycard();
 		if($data ['query']==NULL){
 			$this->load->view('Alert_Null');
@@ -83,9 +98,8 @@ class Welcome extends CI_Controller {
 	}
 	public function Show_mylike(){
 		$this->load->view('Navbar');
-		$username = $this->session->userdata['logged_in']['username'];
-		$data ['query'] = $this->Get_infos->get_mylike($username);
-		if($data ['query']==NULL){
+		$data ['query'] = $this->Get_infos->get_mylike();
+		if($data ['query'] == NULL){
 			$this->load->view('Alert_like');
 		}
 		$this->load->view('Show_card-like',$data);
@@ -173,9 +187,12 @@ class Welcome extends CI_Controller {
 	public function del_card_like(){
 		$card_id = $this->input->get('card_id');
 		$this->Del->del_card_like($card_id);
-		$username = $this->session->userdata['logged_in']['username'];
-		$data ['query'] = $this->Get_infos->get_mylike($username);
+		
 		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_mylike();
+		if($data ['query'] == NULL){
+			$this->load->view('Alert_like');
+		}
 		$this->load->view('Show_card-like',$data);
 	}
 	
@@ -279,9 +296,9 @@ class Welcome extends CI_Controller {
 		$email = $this->input->post('email');
 		$tel = $this->input->post('tel');
 		$gender = $this->input->post('gender');
-		#$day = $this->input->post('day');
-		#$month = $this->input->post('month');
-		#$year = $this->input->post('year');
+		$day = $this->input->post('day');
+		$month = $this->input->post('month');
+		$year = $this->input->post('year');
 		$pass = $this->input->post('password');
 		$c_pass = $this->input->post('confirm-password');
 		$check_mail = $this->Check_mails->check_email($email);
@@ -310,6 +327,9 @@ class Welcome extends CI_Controller {
 						  'lastname' => $lastname,
 						  'password'=> $pass,
 						  'pic'=>$pic,
+						  'day'=>$day,
+						  'month'=>$month,
+						  'year'=>$year,
 						  'email' => $email,
 						  'tel'=> $tel,
 						  'gender' => $gender

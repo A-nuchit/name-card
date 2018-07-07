@@ -1,7 +1,7 @@
 
   <?php foreach($query as $r):?>
-		<div class="container" style="padding-top: 20px; width: 40%">
-          <div class = "border_show">
+		<div class="container" style="padding-top: 20px; width: 40%;">
+          <div class = "border_show" style="background-color: #999999 ">
               <name><?php echo $r->topic; ?></name>
               <type>(<?php if($r->type_job == 1){
                 echo "Fulltime";
@@ -21,6 +21,7 @@
                       </div>
                     </div>
                     <a href='<?php echo base_url() ?>index.php/welcome/del_card_like?card_id=<?php echo $r->card_id ?>'> Del</a>
+
           </div>
       </div>
   <?php endforeach; ?>

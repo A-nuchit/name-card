@@ -52,6 +52,9 @@ if (isset($this->session->userdata['logged_in'])) {
         		<li class="nav-item active">
           		<a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_listcards">List card</a>
         		</li>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/Addtype_form">Add work type</a>
+            </li>
       	</ul>
       	<form class="form-inline my-2 my-lg-0">
       		<a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/home/" >Wellcome , <?php echo $username ?></a>
