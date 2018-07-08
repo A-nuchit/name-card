@@ -38,6 +38,7 @@
     background: #fff;
     box-shadow: 2px 5px 7px #70707070;
     word-wrap:break-word;
+    
   }
   .container
   {

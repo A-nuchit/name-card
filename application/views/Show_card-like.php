@@ -1,7 +1,15 @@
 
-  <?php foreach($query as $r):?>
+  <?php foreach($query as $r):
+    $pic = "assets/images/"."test".".png"
+    ?>
+<style type="text/css">
+.border_show
+  {
+    background-image: url("<?php echo base_url() . $pic; ?>");
+  }
+</style>
 		<div class="container" style="padding-top: 20px; width: 40%;">
-          <div class = "border_show" style="background-color: #999999 ">
+          <div class = "border_show">
               <name><?php echo $r->topic; ?></name>
               <type>(<?php if($r->type_job == 1){
                 echo "Fulltime";
@@ -20,8 +28,7 @@
                         <p> Tel : <?php echo $r->tel; ?></p>
                       </div>
                     </div>
-                    <a href='<?php echo base_url() ?>index.php/welcome/del_card_like?card_id=<?php echo $r->card_id ?>'> Del</a>
-
           </div>
+          <a href='<?php echo base_url() ?>index.php/welcome/del_card_like?card_id=<?php echo $r->card_id ?>'> Del</a>
       </div>
   <?php endforeach; ?>

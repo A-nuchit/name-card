@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Welcome extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
@@ -187,7 +188,7 @@ class Welcome extends CI_Controller {
 	public function del_card_like(){
 		$card_id = $this->input->get('card_id');
 		$this->Del->del_card_like($card_id);
-		
+
 		$this->load->view('Navbar');
 		$data ['query'] = $this->Get_infos->get_mylike();
 		if($data ['query'] == NULL){
@@ -230,6 +231,12 @@ class Welcome extends CI_Controller {
 										'email' => $result[0]->email,
 										);
 				$this->session->set_userdata('logged_in', $session_data);
+				$login = array('user_id' => $this->session->userdata['logged_in']['user_id'],
+							   'date_login' => date("Y-m-d")
+							);
+				echo $this->Add_users->date_check();
+				$this->Add_users->add_timelogin($login);
+
 				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$this->load->view('Admin_page');
 					$data ['query'] = $this->Get_infos->get_job();
@@ -289,9 +296,9 @@ class Welcome extends CI_Controller {
 		$config['file_name'] = $username;
 		$this->load->library("upload",$config);
 		$this->load->model('Check_mails');
-			$district = $this->input->post('district');
-			$province = $this->input->post('province');
-			$zip_code = $this->input->post('zip_code');
+		$district = $this->input->post('district');
+		$province = $this->input->post('province');
+		$zip_code = $this->input->post('zip_code');
 		$lastname = $this->input->post('lastname');
 		$email = $this->input->post('email');
 		$tel = $this->input->post('tel');

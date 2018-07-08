@@ -63,6 +63,38 @@ class Add_users extends CI_Model
 			return false;
 		}
 	}
+	public function add_timelogin($data)
+	{
+		$this->load->database();
+		$this->db->set($data);
+		$count = $this->db->insert('login',$data);
+		if($count>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public function date_check()
+	{
+		$user_id = $this->session->userdata['logged_in']['user_id'];
+		$date = "date_add('2018-07-9',interval -1 day)";
+		$this->db->select('*');
+		$this->db->from('login');
+		$this->db->where('date(date_login)', $date);
+		$this->db->where('user_id',$user_id);
+		$query = $this->db->get();
+		if($query->num_rows() == 0){
+			return "cat";
+		}
+		else{
+			return "dog";
+		}
+
+		
+	}
 	public function read_user_information($username) {
 		$condition = "username =" . "'" . $username . "'";
 		$this->db->select('*');
@@ -75,7 +107,7 @@ class Add_users extends CI_Model
 			return $query->result();
 		} else {
 			return false;
+		}	
 	}
-}
 }
 ?>
