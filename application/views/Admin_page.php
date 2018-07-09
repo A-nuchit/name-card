@@ -21,19 +21,58 @@ if (isset($this->session->userdata['logged_in'])) {
       color: #ffffff;
       font-family: 'Prompt', sans-serif;
   }
-  	 .border
+     .border
   {
-  	padding: 5% 5% 5% 5%;
-  	background: #fff;
-  	box-shadow: 2px 5px 7px #70707070;
-  	-webkit-border-radius: 6px 6px 30px 6px;
-	border-radius: 6px 6px 30px 6px;
+    padding: 5% 5% 5% 5%;
+    background: #fff;
+    box-shadow: 2px 5px 7px #70707070;
+    -webkit-border-radius: 6px 6px 30px 6px;
+    border-radius: 6px 6px 30px 6px;
   }
     h2
   {
-  	color: #707070;
+    color: #707070;
   }
-
+  .container
+  {
+    padding-top: 20px;
+  }
+  form{
+    margin-bottom: 0;
+  }
+  .border_show
+  {
+    padding: 15px 15px 15px 15px;
+    background: #fff;
+    background: #fff;
+    box-shadow: 2px 5px 7px #70707070;
+    word-wrap:break-word;
+    
+  }
+  .container
+  {
+    padding-top: 20px;
+  }
+  name{
+    font-size: 20px;
+    color: #707070;
+  }
+  timepost{
+     font-size: 15px;
+     color: #707070;
+  }
+  contact{
+     font-size: 17px;
+     color: #606060;
+  }
+  p{
+    color: #707070;
+    font-size: 70%;
+  }
+  type{
+    font-size: 15px;
+    color: #707070;
+  }
 
   </style>
 </head>

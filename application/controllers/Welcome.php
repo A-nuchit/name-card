@@ -86,7 +86,9 @@ class Welcome extends CI_Controller {
 	}
 	public function Show_card_admin(){
 		$this->load->view('Admin_page');
-		$data ['query'] = $this->Get_infos->get_card();
+		$data = array('query' => $this->Get_infos->get_card(),
+					  'like_qurey' => $this->Get_infos->get_like()
+		 			  );
 		$this->load->view('Show_card',$data);
 	}
 	public function Show_mycard(){
@@ -229,6 +231,7 @@ class Welcome extends CI_Controller {
 			 							'user_id' => $result[0]->user_id,
 										'username' => $result[0]->username,
 										'email' => $result[0]->email,
+										'point' => $result[0]->point
 										);
 				$this->session->set_userdata('logged_in', $session_data);
 				$login = array('user_id' => $this->session->userdata['logged_in']['user_id'],
@@ -263,7 +266,22 @@ class Welcome extends CI_Controller {
 		$district = $this->input->post('district');
 		$province = $this->input->post('province');
 		$zip_code = $this->input->post('zip_code');
+		$pic_logo = $this->input->post('pic_logo');
+		$pic_bg = $this->input->post('pic_bg');
 		$time = date("Y-m-d h:i:sa");
+			$config['upload_path'] = 'assets/images/';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			$config['remove_spaces'] = TRUE;
+			$config['file_name'] = $this->session->userdata['logged_in']['username']."_".$time."_".rand(10,10000)."_logo";
+			$this->load->library("upload",$config);
+			$check_pic = $this->upload->do_upload('pic_logo');
+			$uploadData = $this->upload->data();
+			$pic_logo = $uploadData['file_name'];
+			$config['file_name'] = $this->session->userdata['logged_in']['username']."_".$time."_".rand(10,10000)."_bg";
+			$this->load->library("upload",$config);
+			$check_pic = $this->upload->do_upload('pic_bg');
+			$uploadData = $this->upload->data();
+			$pic_bg = $uploadData['file_name'];
 		$data = array(  'topic' => $topic,
 						'detail' => $detail,
 						'type_job'=> $type_job,
@@ -271,6 +289,8 @@ class Welcome extends CI_Controller {
 						'district' => $district,
 						'province' => $province,
 						'zip_code' => $zip_code,
+						'pic_logo' => $pic_logo,
+						'pic_bg' => $pic_bg,
 						'time' => $time,
 						'user_id'=> $this->session->userdata['logged_in']['user_id'] );
 		if($this->Insert_card->add_card($data)){
@@ -368,7 +388,9 @@ class Welcome extends CI_Controller {
 	}
 	public function logout() {
 		$sess_array = array(
-			'name' => '',
+			'username' => '',
+			'user_id' => '',
+			'point' => '',
 			'email' => ''
 				);
 		$this->session->unset_userdata('logged_in', $sess_array);

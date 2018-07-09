@@ -45,7 +45,7 @@
     padding-top: 20px;
   }
   name{
-    font-size: 25px;
+    font-size: 20px;
     color: #707070;
   }
   timepost{
@@ -58,7 +58,7 @@
   }
   p{
     color: #707070;
-    font-size: 80%;
+    font-size: 70%;
   }
   type{
     font-size: 15px;

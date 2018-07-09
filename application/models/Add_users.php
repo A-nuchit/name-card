@@ -78,22 +78,46 @@ class Add_users extends CI_Model
 		}
 	}
 	public function date_check()
-	{
+	{   
 		$user_id = $this->session->userdata['logged_in']['user_id'];
-		$date = "date_add('2018-07-9',interval -1 day)";
+		$date = "date_add('".date('Y-m-d')."',interval 0 day)";
 		$this->db->select('*');
 		$this->db->from('login');
-		$this->db->where('date(date_login)', $date);
+		$this->db->where('date(date_login) >=', $date);
 		$this->db->where('user_id',$user_id);
 		$query = $this->db->get();
-		if($query->num_rows() == 0){
-			return "cat";
+		if($query->num_rows() > 0){
+			 #to day have login  NULL
 		}
-		else{
-			return "dog";
+		else
+		{
+			$date = "date_add('".date('Y-m-d')."',interval -1 day)";
+			$this->db->select('*');
+			$this->db->from('login');
+			$this->db->where('date(date_login) >=', $date);
+			$this->db->where('user_id',$user_id);
+			$query = $this->db->get();
+			if($query->num_rows() > 0){
+				$this->db->set('point', 'point+1');
+				$this->db->where('user_id', $user_id);
+				$this->db->update('member');
+				#have yesterday  +1
+			}
+			else{
+					if((int)$this->session->userdata['logged_in']['point'] < 10){
+						$this->db->set('point', '0' , FALSE);
+						$this->db->where('user_id', $user_id);
+						$this->db->update('member');
+					}
+					else{
+					$this->db->set('point', 'point-10', FALSE);
+					$this->db->where('user_id', $user_id);
+					$this->db->update('member');
+					#frist time -> -10 or valur == 0 -> NULL 
+					}
+				
+			}
 		}
-
-		
 	}
 	public function read_user_information($username) {
 		$condition = "username =" . "'" . $username . "'";

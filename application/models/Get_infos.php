@@ -45,6 +45,8 @@ class Get_infos extends CI_Model
 							member.tel,
 							card.user_id, 
 							card.topic,
+							card.pic_bg,
+							card.pic_logo,
 							card.detail,
 							card.type_job,
 							work_type.nametype '
@@ -70,6 +72,8 @@ class Get_infos extends CI_Model
 							card.user_id, 
 							card.topic,
 							card.detail,
+							card.pic_bg,
+							card.pic_logo,
 							card.type_job,
 							work_type.nametype');
 		$this->db->from('like');
@@ -93,6 +97,8 @@ class Get_infos extends CI_Model
 							card.user_id, 
 							card.topic,
 							card.detail,
+							card.pic_bg,
+							card.pic_logo,
 							card.type_job,
 							work_type.nametype '
 					);
