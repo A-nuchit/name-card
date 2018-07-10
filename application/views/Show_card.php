@@ -21,6 +21,7 @@
   .click{
     color: #fff;
   }
+
 </style>
 		<div class="container" style="padding-top: 20px; width: 30%">
           <div class = "border_show" style="background-image:url(<?php echo base_url() . $pic_bg; ?>); background-size: 100% ;">
@@ -48,9 +49,11 @@
                     <p> Tel : <?php echo $r->tel; ?></p>
                   </div>
                 </div>
+              <?php } ?>
             </div>
-          </div>
-          <?php if($this->session->userdata['logged_in']['user_id'] != $r->user_id){
+          </div><?php
+          if (isset($this->session->userdata['logged_in'])) {
+             if($this->session->userdata['logged_in']['user_id'] != $r->user_id){
                                $check = TRUE;
                                foreach($like_qurey as $l):
                                 if($l->card_id == $r->card_id){
@@ -61,8 +64,9 @@
                                 ?> <a class="click" href='<?php echo base_url() ?>index.php/welcome/save_card?card_id=<?php echo $r->card_id ?>'> Save</a>
                         <?php }
                     }
-                    else{?>
-                        <a class="click" href='<?php echo base_url() ?>index.php/welcome/del_card_user?card_id=<?php echo $r->card_id ?>'> Del</a> <?php
+                  else{?>
+                      <a class="click" href='<?php echo base_url() ?>index.php/welcome/del_card_user?card_id=<?php echo $r->card_id ?>'> Del</a>
+                      <a class="click" href='<?php echo base_url() ?>index.php/welcome/edit_card?card_id=<?php echo $r->card_id ?>'> Edit</a> <?php
                     }
                   }
                   ?>

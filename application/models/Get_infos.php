@@ -29,6 +29,31 @@ class Get_infos extends CI_Model
 		$data = $this->db->get();
         return $data->result();
 	}
+	public function get_a_card($card_id)
+	{
+		$this->db->select('	card.card_id ,
+							member.username,
+							member.name,
+							member.lastname,
+							member.email,
+							member.tel,
+							card.user_id, 
+							card.topic,
+							card.pic_bg,
+							card.pic_logo,
+							card.detail,
+							card.district_card,
+							card.province_card,
+							card.zip_code_card,
+							card.type_job,
+							work_type.nametype ');
+		$this->db->from('card');
+		$this->db->where('card_id',$card_id);
+		$this->db->join('work_type', 'card.work_id = work_type.work_id');
+		$this->db->join('member', 'card.user_id = member.user_id');
+		$data = $this->db->get();
+        return $data->result();
+	}
 	public function get_job()
 	{
 		$data = $this->db->get('work_type');
@@ -88,6 +113,7 @@ class Get_infos extends CI_Model
 	{
 		$nametype = $data['nametype'];
 		$word = $data['word'];
+		$province = $data['province'];
 		$this->db->select('	card.card_id ,
 							member.username,
 							member.name,
@@ -98,6 +124,7 @@ class Get_infos extends CI_Model
 							card.topic,
 							card.detail,
 							card.pic_bg,
+							card.province_card,
 							card.pic_logo,
 							card.type_job,
 							work_type.nametype '
@@ -106,9 +133,14 @@ class Get_infos extends CI_Model
 		if($nametype != '*' || $nametype == NULL){
 			$this->db->where('nametype',$nametype);
 		}
-		if($word != NULL){
+		if($province != '*' || $province == NULL){
+			$this->db->where('province_card',$province);
+		}
+		if($word != ""){
 			$this->db->like('topic',$word);
-			$this->db->or_like('detail',$word);
+		}
+		if($word != ""){
+			$this->db->like('detail',$word);
 		}
 		$this->db->join('work_type', 'card.work_id = work_type.work_id');
 		$this->db->join('member', 'card.user_id = member.user_id');

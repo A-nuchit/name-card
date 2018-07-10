@@ -14,6 +14,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('Insert_card');
 		$this->load->model('Del');
 		$this->load->model('Create_table');
+		$this->load->model('Update');
 	}
 	public function index(){
 		$this->load->view('Navbar');
@@ -27,11 +28,19 @@ class Welcome extends CI_Controller {
 	public function searchs(){
 		$info = array(
 				'nametype' => $this->input->post('type_job'),
-				'word' => $this->input->post('word')
+				'word' => $this->input->post('word'),
+				'province' =>$this->input->post('province')
 				);
-		$data_search = array('query' => $this->Get_infos->get_search($info),
+		
+		if(isset($this->session->userdata['logged_in'])){
+			$data_search = array('query' => $this->Get_infos->get_search($info),
 							 'like_qurey' => $this->Get_infos->get_like()
 		 			  );
+		}
+		else{
+			$data_search = array('query' => $this->Get_infos->get_search($info)
+		 			  );
+		}
 		$data ['query'] = $this->Get_infos->get_job();
 		$this->load->view('Navbar');
 
@@ -41,6 +50,42 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('Show_card',$data_search);
 	}
+
+
+
+
+	public function edit_card(){
+		$card_id = $this->input->get('card_id');
+		$this->load->view('Navbar');
+		$data['query'] = $this->Get_infos->get_a_card($card_id);
+		if($data['query'] == NULL){
+			echo "string";
+		}
+		$this->load->view('Edit_from',$data);
+	}
+	public function update_card(){
+		$card_id = $this->input->post('card');
+		$type_job = $this->input->post('type_job');
+		$district = $this->input->post('district');
+		$province = $this->input->post('province');
+		$zip_code = $this->input->post('zip_code');
+		$timelast_update = date("Y-m-d h:i:sa");
+		$data_update = array('type_job' => $type_job,
+							  'district_card' => $district,
+							  'province_card' => $province,
+							  'zip_code_card' => $zip_code,
+							  'timelast_update' => $timelast_update
+							 );
+		$this->Update->update_card($data_update,$card_id);
+		$this->load->view('Navbar');
+		$data ['query'] = $this->Get_infos->get_mycard();
+		if($data ['query']== NULL){
+			$this->load->view('Alert_Null');
+		}
+		$this->load->view('Show_card',$data);
+
+	}
+
 	public function save_card(){
 		$card_id = $this->input->get('card_id');
 		$data = array('card_id' => $card_id,
@@ -94,7 +139,7 @@ class Welcome extends CI_Controller {
 	public function Show_mycard(){
 		$this->load->view('Navbar');
 		$data ['query'] = $this->Get_infos->get_mycard();
-		if($data ['query']==NULL){
+		if($data ['query']== NULL){
 			$this->load->view('Alert_Null');
 		}
 		$this->load->view('Show_card',$data);
@@ -235,7 +280,8 @@ class Welcome extends CI_Controller {
 										);
 				$this->session->set_userdata('logged_in', $session_data);
 				$login = array('user_id' => $this->session->userdata['logged_in']['user_id'],
-							   'date_login' => date("Y-m-d")
+							   'date_login' => date("Y-m-d"),
+							   'time_login' => date("h:i:sa")
 							);
 				echo $this->Add_users->date_check();
 				$this->Add_users->add_timelogin($login);
@@ -268,7 +314,7 @@ class Welcome extends CI_Controller {
 		$zip_code = $this->input->post('zip_code');
 		$pic_logo = $this->input->post('pic_logo');
 		$pic_bg = $this->input->post('pic_bg');
-		$time = date("Y-m-d h:i:sa");
+		$time = $timelast_update = date("Y-m-d h:i:sa");
 			$config['upload_path'] = 'assets/images/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['remove_spaces'] = TRUE;
@@ -277,8 +323,11 @@ class Welcome extends CI_Controller {
 			$check_pic = $this->upload->do_upload('pic_logo');
 			$uploadData = $this->upload->data();
 			$pic_logo = $uploadData['file_name'];
-			$config['file_name'] = $this->session->userdata['logged_in']['username']."_".$time."_".rand(10,10000)."_bg";
-			$this->load->library("upload",$config);
+			$config2['upload_path'] = 'assets/images/';
+			$config2['allowed_types'] = 'gif|jpg|jpeg|png';
+			$config2['remove_spaces'] = TRUE;
+			$config2['file_name'] = $this->session->userdata['logged_in']['username']."_".$time."_".rand(10,10000)."_bg";
+			$this->load->library("upload",$config2);
 			$check_pic = $this->upload->do_upload('pic_bg');
 			$uploadData = $this->upload->data();
 			$pic_bg = $uploadData['file_name'];
@@ -286,12 +335,13 @@ class Welcome extends CI_Controller {
 						'detail' => $detail,
 						'type_job'=> $type_job,
 						'work_id'=> $work_id,
-						'district' => $district,
-						'province' => $province,
-						'zip_code' => $zip_code,
+						'district_card' => $district,
+						'province_card' => $province,
+						'zip_code_card' => $zip_code,
 						'pic_logo' => $pic_logo,
 						'pic_bg' => $pic_bg,
 						'time' => $time,
+						'timelast_update' => $timelast_update,
 						'user_id'=> $this->session->userdata['logged_in']['user_id'] );
 		if($this->Insert_card->add_card($data)){
 			if($this->session->userdata['logged_in']['username'] == "admin"){
@@ -363,7 +413,6 @@ class Welcome extends CI_Controller {
 						);
 				if($this->Add_users->add($data) && $this->Email->sent_email($name,$lastname,$email,$tel))
 				{
-					$this->Create_table->create($username);
 					$this->load->view('Login_form');
 				}
 				else
