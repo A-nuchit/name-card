@@ -49,10 +49,12 @@
                 <input type="file" class="form-control" placeholder="File" name="pic_logo" required>
                 <label style="color: #707070;">Backgound picture.</label>
                 <input type="file" class="form-control" placeholder="File" name="pic_bg" required>
-
-        <center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
-            <input type="reset" class="btn btn-default" value="Reset">
-        </center>
+                <div style="padding-top: 10px">
+                    <center>
+                        <button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </center>
+                </div>
     </form>
     <?php endif; ?>
   </div>

@@ -6,8 +6,7 @@
           	
             <label>Search work</label>
             <input type="text" placeholder="All work" class="form-control" name="word" >
-            <dir class="row" style="padding-right:40px">  
-                <div class="col">
+                <div style="width: 48%; float: left;">
                   <div class="form-group">
                     <label>Type Job</label>
                     <select class="form-control" name="type_job">
@@ -19,7 +18,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col">
+                <div style="width: 48%; float: right;">
                   <div class="form-group">
                     <label >Select plance work</label>
                     <select class="form-control" name="province">
@@ -30,7 +29,7 @@
                     </select>
                   </div>
                 </div>
-            </dir>
+
               <center>
               	<button type="submit" class="btn btn-outline-light">Search</button>
               </center>

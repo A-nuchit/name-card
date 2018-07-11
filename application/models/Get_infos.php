@@ -138,8 +138,6 @@ class Get_infos extends CI_Model
 		}
 		if($word != ""){
 			$this->db->like('topic',$word);
-		}
-		if($word != ""){
 			$this->db->like('detail',$word);
 		}
 		$this->db->join('work_type', 'card.work_id = work_type.work_id');

@@ -75,19 +75,19 @@ if (isset($this->session->userdata['logged_in'])) {
          <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/index">Navbar</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">Profile</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/create_card">Create card</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">Show my card</a>
             </li>
-             <li class="nav-item active">
+             <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mylike">Show my like</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome">Search</a>
             </li>
         </ul>

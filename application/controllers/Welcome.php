@@ -24,7 +24,6 @@ class Welcome extends CI_Controller {
 	public function testb(){
 		$this->load->view('testb');
 	}
-
 	public function searchs(){
 		$info = array(
 				'nametype' => $this->input->post('type_job'),
@@ -50,10 +49,6 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('Show_card',$data_search);
 	}
-
-
-
-
 	public function edit_card(){
 		$card_id = $this->input->get('card_id');
 		$this->load->view('Navbar');
@@ -111,57 +106,192 @@ class Welcome extends CI_Controller {
 		$this->load->view('Login_form');
 	}
 	public function Addtype_form(){
-		$this->load->view('Admin_page');
-		$data ['query'] = $this->Get_infos->get_job();
-		$this->load->view('Insert_type');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+					$this->load->view('Admin_page');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Insert_type');
+					}
+				else{
+						$this->load->view('Navbar');
+						$data ['query'] = $this->Get_infos->get_job();
+						$this->load->view('Addcard_form',$data);
+				}
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function add_type(){
-		$work_type = array ('nametype' => $this->input->post('work_type'),
-							'dis_type' => $this->input->post('work_type_dis')
-						);
-		$this->Add_users->add_type($work_type);
-		$this->load->view('Admin_page');
-		$data ['query'] = $this->Get_infos->get_job();
-		$this->load->view('Insert_type');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+						$work_type = array ('nametype' => $this->input->post('work_type'),
+											'dis_type' => $this->input->post('work_type_dis')
+										);
+						$this->Add_users->add_type($work_type);
+						$this->load->view('Admin_page');
+						$data ['query'] = $this->Get_infos->get_job();
+						$this->load->view('Insert_type');
+					}
+				else{
+						$this->load->view('Navbar');
+						$data ['query'] = $this->Get_infos->get_job();
+						$this->load->view('Addcard_form',$data);
+
+				}
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function home(){
-		$this->load->view('Admin_page');
-		$data ['query'] = $this->Get_infos->get_job();
-		$this->load->view('Addcard_form',$data);
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+					$this->load->view('Admin_page');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
+					}
+				else{
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
+
+				}
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function Show_card_admin(){
-		$this->load->view('Admin_page');
-		$data = array('query' => $this->Get_infos->get_card(),
-					  'like_qurey' => $this->Get_infos->get_like()
-		 			  );
-		$this->load->view('Show_card',$data);
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+					$this->load->view('Admin_page');
+					$data = array('query' => $this->Get_infos->get_card(),
+								  'like_qurey' => $this->Get_infos->get_like()
+					 			  );
+					$this->load->view('Show_card',$data);
+					}
+				else{
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
+
+				}
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function Show_mycard(){
-		$this->load->view('Navbar');
-		$data ['query'] = $this->Get_infos->get_mycard();
-		if($data ['query']== NULL){
-			$this->load->view('Alert_Null');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				$this->load->view('Navbar');
+				$data ['query'] = $this->Get_infos->get_mycard();
+				if($data ['query']== NULL){
+					$this->load->view('Alert_Null');
+				}
+				$this->load->view('Show_card',$data);
+			}
+			else{
+				$this->load->view('Login_form');
+			}
 		}
-		$this->load->view('Show_card',$data);
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function Show_mylike(){
-		$this->load->view('Navbar');
-		$data ['query'] = $this->Get_infos->get_mylike();
-		if($data ['query'] == NULL){
-			$this->load->view('Alert_like');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				$this->load->view('Navbar');
+				$data ['query'] = $this->Get_infos->get_mylike();
+				if($data ['query'] == NULL){
+					$this->load->view('Alert_like');
+				}
+				$this->load->view('Show_card-like',$data);
+				}
+			else{
+				$this->load->view('Login_form');
+			}
 		}
-		$this->load->view('Show_card-like',$data);
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 
 	public function show_table(){
-		$this->load->view('Navbar');
-		$data ['query'] = $this->Get_infos->get_info();
-		$this->load->view('Show_table',$data);
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				if($this->session->userdata['logged_in']['username'] == "admin"){
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_info();
+					$this->load->view('Show_table',$data);
+				}
+				else{
+					$this->load->view('Navbar');
+					$data ['query'] = $this->Get_infos->get_job();
+					$this->load->view('Addcard_form',$data);
+
+				}
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function create_card(){
-		$this->load->view('Navbar');
-		$data ['query'] = $this->Get_infos->get_job();
-		$this->load->view('Addcard_form',$data);
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			if(isset($this->session->userdata['logged_in'])){
+				$this->load->view('Navbar');
+				$data ['query'] = $this->Get_infos->get_job();
+				$this->load->view('Addcard_form',$data);
+			}
+			else{
+				$this->load->view('Login_form');
+			}
+		}
+		else{
+			$this->load->view('Login_form');
+		}
 	}
 	public function show_member(){
 		$this->form_validation->set_rules('username', 'Username', 'required');
