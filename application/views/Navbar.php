@@ -64,6 +64,15 @@
     font-size: 15px;
     color: #707070;
   }
+  datail{
+    font-size: 12px;
+    color: #707070;
+  }
+  last{
+    font-size: 10px;
+    color: #fff;
+  }
+
   </style>
 </head>
 <?php
@@ -92,7 +101,7 @@ if (isset($this->session->userdata['logged_in'])) {
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/index" >Wellcome , <?php echo $username ?></a>
+          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/index" >Welcome , <?php echo $username ?></a>
             <a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
         </form>
         </div>

@@ -11,6 +11,14 @@ class Get_infos extends CI_Model
 		$data = $this->db->get('member');
         return $data->result();
 	}
+
+	public function get_lasttimelogin($data){
+		$this->db->select('*');
+		$this->db->from('login');
+		$this->db->where('login_id','(SELECT MAX(login_id) FROM login WHERE user_id = $data)');
+		$data = $this->db->get();
+        return $data->result();
+	}	
 	public function get_like()
 	{
 		$user_id = $this->session->userdata['logged_in']['user_id'];
@@ -31,13 +39,14 @@ class Get_infos extends CI_Model
 	}
 	public function get_a_card($card_id)
 	{
-		$this->db->select('	card.card_id ,
+		$this->db->select('	card.card_id,
 							member.username,
 							member.name,
 							member.lastname,
 							member.email,
+							member.last_login,
 							member.tel,
-							card.user_id, 
+							card.user_id,
 							card.topic,
 							card.pic_bg,
 							card.pic_logo,
@@ -67,6 +76,7 @@ class Get_infos extends CI_Model
 							member.name,
 							member.lastname,
 							member.email,
+							member.last_login,
 							member.tel,
 							card.user_id, 
 							card.topic,
@@ -92,6 +102,7 @@ class Get_infos extends CI_Model
 							member.name,
 							member.lastname,
 							member.email,
+							member.last_login,
 							member.tel,
 							card.card_id, 
 							card.user_id, 
@@ -119,6 +130,7 @@ class Get_infos extends CI_Model
 							member.name,
 							member.lastname,
 							member.email,
+							member.last_login,
 							member.tel,
 							card.user_id, 
 							card.topic,
@@ -129,16 +141,17 @@ class Get_infos extends CI_Model
 							card.type_job,
 							work_type.nametype '
 					);
+
 		$this->db->from('card');
+		if($word != ""){
+			$this->db->like('topic',$word);
+			$this->db->or_like('detail',$word);
+		}
 		if($nametype != '*' || $nametype == NULL){
 			$this->db->where('nametype',$nametype);
 		}
 		if($province != '*' || $province == NULL){
 			$this->db->where('province_card',$province);
-		}
-		if($word != ""){
-			$this->db->like('topic',$word);
-			$this->db->like('detail',$word);
 		}
 		$this->db->join('work_type', 'card.work_id = work_type.work_id');
 		$this->db->join('member', 'card.user_id = member.user_id');

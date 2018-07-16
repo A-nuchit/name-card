@@ -30,10 +30,9 @@ class Welcome extends CI_Controller {
 				'word' => $this->input->post('word'),
 				'province' =>$this->input->post('province')
 				);
-		
 		if(isset($this->session->userdata['logged_in'])){
 			$data_search = array('query' => $this->Get_infos->get_search($info),
-							 'like_qurey' => $this->Get_infos->get_like()
+							     'like_qurey' => $this->Get_infos->get_like()
 		 			  );
 		}
 		else{
@@ -42,7 +41,6 @@ class Welcome extends CI_Controller {
 		}
 		$data ['query'] = $this->Get_infos->get_job();
 		$this->load->view('Navbar');
-
 		$this->load->view('Search',$data);
 		if($data_search['query'] == NULL){
 			$this->load->view('Alert_Null');
@@ -78,9 +76,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('Alert_Null');
 		}
 		$this->load->view('Show_card',$data);
-
 	}
-
 	public function save_card(){
 		$card_id = $this->input->get('card_id');
 		$data = array('card_id' => $card_id,
@@ -90,7 +86,8 @@ class Welcome extends CI_Controller {
 		$data ['query'] = $this->Get_infos->get_job();
 		$info = array(
 				'nametype' => '*',
-				'word' => ""
+				'word' => "",
+				'province'=>"*"
 				);
 		$data_search = array('query' => $this->Get_infos->get_search($info),
 							 'like_qurey' => $this->Get_infos->get_like()
@@ -413,8 +410,10 @@ class Welcome extends CI_Controller {
 							   'date_login' => date("Y-m-d"),
 							   'time_login' => date("h:i:sa")
 							);
-				echo $this->Add_users->date_check();
+				$date_last = array('last_login' => date("Y-m-d h:i:sa"));
+				$this->Add_users->date_check();
 				$this->Add_users->add_timelogin($login);
+				$this->Update->update_lasttime($date_last,$result[0]->user_id);
 
 				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$this->load->view('Admin_page');

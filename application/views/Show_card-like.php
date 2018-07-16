@@ -35,13 +35,14 @@
               <contact>Contact</contact>
               <timepost><br><?php echo $r->name." ".$r->lastname ?></timepost>
                     <div class="row">
-                      <div class="col">
-                        <p> E-mail : <?php echo $r->email; ?></p>
+                      <div class="col-md-7">
+                        <datail> E-mail : <?php echo $r->email; ?></datail>
                       </div>
-                      <div class="col">
-                        <p> Tel : <?php echo $r->tel; ?></p>
+                      <div class="col-md-5">
+                        <datail> Tel : <?php echo $r->tel; ?></datail>
                       </div>
                     </div>
+                    <last> Lastlogin : <?php echo $r->last_login; ?></last>
           </div>    
           <a class="click" href='<?php echo base_url() ?>index.php/welcome/del_card_like?card_id=<?php echo $r->card_id ?>'> Del</a>
       </div>

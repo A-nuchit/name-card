@@ -1,5 +1,7 @@
 
-  <?php foreach($query as $r):
+  <?php 
+        $this->load->model('Get_infos');
+        foreach($query as $r):
         $pic_bg = "assets/images/".$r->pic_bg;
         $pic_logo = "assets/images/".$r->pic_logo;
     ?>
@@ -42,14 +44,17 @@
               if (isset($this->session->userdata['logged_in'])) {
               ?>
                 <div class="row">
-                  <div class="col">
-                    <p> E-mail : <?php echo $r->email; ?></p>
+                  <div class="col-md-7">
+                    <datail> E-mail : <?php echo $r->email; ?></datail>
                   </div>
-                  <div class="col">
-                    <p> Tel : <?php echo $r->tel; ?></p>
+                  <div class="col-md-5">
+                    <datail> Tel : <?php echo $r->tel; ?></datail>
                   </div>
                 </div>
-              <?php } ?>
+                <?php if ($this->session->userdata['logged_in']['user_id'] != $r->user_id){ ?>
+                    <last> Lastlogin : <?php echo $r->last_login; ?></last>
+              <?php } 
+            } ?>
             </div>
           </div><?php
           if (isset($this->session->userdata['logged_in'])) {
