@@ -1,0 +1,106 @@
+<style type="text/css">
+  .profile1{
+     width: 80px;
+     height: 80px;
+     right: 48%;
+  }
+    .profile2{
+    position: absolute;
+     z-index: 2;
+     width: 80px;
+     height: 80px;
+     left: 9%;
+  }
+  .click{
+    color: #fff;
+  }
+  name1{
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  topic1{
+    font-size: 13px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  type1{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  detail1{
+    font-size: 12px;
+    color: #fff;
+    line-height: 0.5;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  email1{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  tel1{
+    font-size: 12px;
+    color: #fff;
+    line-height: 1;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  last1{
+    font-size: 9px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+
+  .click{
+    color: #fff;
+  }
+  name2{
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  topic2{
+    font-size: 13px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  type2{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  detail2{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  email2{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  tel2{
+    font-size: 12px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  last2{
+    font-size: 9px;
+    color: #fff;
+    text-shadow:1px 1px 1px #3D3D3D;
+  }
+  .profile{
+     position: absolute;
+     z-index: 2;
+     width: 80px;
+     height: 80px;
+     right: 10%;
+  }
+  .displayed {
+    margin-left: auto;
+    margin-right: auto 
+  }
+  </style>

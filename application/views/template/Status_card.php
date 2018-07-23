@@ -1,4 +1,4 @@
- <div  class="container" style=" width: 30%">
+ <div style=" width: 30%">
  <?php
           if (isset($this->session->userdata['logged_in'])) {
              if($this->session->userdata['logged_in']['user_id'] != $user_id){
@@ -19,4 +19,5 @@
                     }
                   }
                   ?>
-                </div>
+</div>
+</div>

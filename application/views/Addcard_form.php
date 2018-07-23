@@ -24,7 +24,7 @@
         <div class="form-group <?php echo (!empty($content_err)) ? 'has-error' : ''; ?>">
             <textarea rows= "5" type="text" name="detail" placeholder="Detail" class="form-control" required></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 10%;">
             <label class="mr-sm-2" style="color: #707070;">Type time</label>
             <select id="inputState" class="form-control" name="type_job">
                 <option value="1" selected>Fulltime</option>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none;">
+            <div style="display: none; ">
                 <input type="text" class="form-control" name="bg" 
                             value="<?php echo $bg ?>" required>
             </div>

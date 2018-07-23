@@ -3,27 +3,8 @@
         $pic_bg = "assets/images/".$pic_bg;
         $pic_logo = "assets/images/".$pic_logo;
     ?>
-<style type="text/css">
-  .profile{
-     position: absolute;
-     z-index: 2;
-     width: 80px;
-     height: 80px;
-     right: 37%;
-  }
-  .bg{
-     position: absolute;
-     z-index: 0;
-     width: 80px;
-     height: 80px;
-     right: 50%;
-  }
-  .click{
-    color: #fff;
-  }
-
-</style>
-		<div class="container" style="padding-top: 20px; width: 30%">
+<div class="col-sm-4">
+		<div style="padding-top: 20px;">
           <div class = "border_show" style="background-image:url(<?php echo base_url() . $pic_bg; ?>); background-size: 100% ;">
             <div class="text">
               <name><?php echo $topic; ?></name>

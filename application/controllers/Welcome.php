@@ -56,8 +56,9 @@ class Welcome extends CI_Controller {
 		if($data_search['query'] == NULL){
 			$this->load->view('Alert_Null');
 		}
+		$this->load->view('css/template.css');
+		$this->load->view('head');
 		foreach($data_search['query'] as $r){
-				
 				$this->load->view("template/".$r->template,$r);
 				if(isset($this->session->userdata['logged_in'])){
 					$like = array('like_qurey' => $this->Get_infos->get_like(),
@@ -66,6 +67,7 @@ class Welcome extends CI_Controller {
 								);
 					$this->load->view('template/Status_card',$like);
 				}
+				echo '</div>';
 				
 		}
 	}
@@ -106,6 +108,8 @@ class Welcome extends CI_Controller {
 		if($data ['query']== NULL){
 			$this->load->view('Alert_Null');
 		}
+		$this->load->view('css/template.css');
+		$this->load->view('head');
 		foreach($data['query'] as $r){
 				$like = array('like_qurey' => $this->Get_infos->get_like(),
 							  'card_id' => $r->card_id,
@@ -175,7 +179,9 @@ class Welcome extends CI_Controller {
 							 'like_qurey' => $this->Get_infos->get_like()
 		 			  );
 		$this->load->view('Navbar');
+		$this->load->view('css/template.css');
 		$this->load->view('Search',$data);
+		$this->load->view('head');
 		foreach($data_search['query'] as $r){
 				$like = array('like_qurey' => $this->Get_infos->get_like(),
 							  'card_id' => $r->card_id,
@@ -292,13 +298,15 @@ class Welcome extends CI_Controller {
 				if($this->session->userdata['logged_in']['username'] == "admin"){
 					$this->load->view('Admin_page');
 					$data['query'] = $this->Get_infos->get_card();
+					$this->load->view('css/template.css');
+					$this->load->view('head');
 					foreach($data['query'] as $r){
-					$like = array('like_qurey' => $this->Get_infos->get_like(),
-							  'card_id' => $r->card_id,
-							  'user_id' => $r->user_id
-								);
-				$this->load->view("template/".$r->template,$r);
-				$this->load->view('template/Status_card',$like);
+						$like = array('like_qurey' => $this->Get_infos->get_like(),
+								  'card_id' => $r->card_id,
+								  'user_id' => $r->user_id
+									);
+						$this->load->view("template/".$r->template,$r);
+						$this->load->view('template/Status_card',$like);
 					}
 				}
 				else{
@@ -326,14 +334,17 @@ class Welcome extends CI_Controller {
 				if($data ['query']== NULL){
 					$this->load->view('Alert_Null');
 				}
+				$this->load->view('css/template.css');
+				$this->load->view('head');
 				foreach($data['query'] as $r){
-				$like = array('like_qurey' => $this->Get_infos->get_like(),
-							  'card_id' => $r->card_id,
-							  'user_id' => $r->user_id
-								);
-				$this->load->view("template/".$r->template,$r);
-				$this->load->view('template/Status_card',$like);
-		}
+					$like = array('like_qurey' => $this->Get_infos->get_like(),
+								  'card_id' => $r->card_id,
+								  'user_id' => $r->user_id
+									);
+					$this->load->view("template/".$r->template,$r);
+					$this->load->view('template/Status_card',$like);
+				}
+				$this->load->view('end');
 			}
 			else{
 				$this->load->view('Login_form');
@@ -350,9 +361,11 @@ class Welcome extends CI_Controller {
 			if(isset($this->session->userdata['logged_in'])){
 				$this->load->view('Navbar');
 				$data ['query'] = $this->Get_infos->get_mylike();
-				if($data ['query'] == NULL){
-					$this->load->view('Alert_like');
+				if($data ['query']== NULL){
+					$this->load->view('Alert_Null');
 				}
+				$this->load->view('css/template.css');
+				$this->load->view('head');
 				foreach($data['query'] as $r){
 					$like = array('like_qurey' => $this->Get_infos->get_like(),
 								  'card_id' => $r->card_id,
@@ -361,6 +374,7 @@ class Welcome extends CI_Controller {
 					$this->load->view("template/".$r->template,$r);
 					$this->load->view('template/Status_card_like');
 				}
+				$this->load->view('end');
 			}
 			else{
 				$this->load->view('Login_form');
@@ -449,13 +463,6 @@ class Welcome extends CI_Controller {
 			$this->load->view('Login_form');
 		}
 	}
-
-
-
-
-
-
-
 	public function show_member(){
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -523,7 +530,16 @@ class Welcome extends CI_Controller {
 		if($data ['query']==NULL){
 			$this->load->view('Alert_Null');
 		}
-		$this->load->view('Show_card',$data);
+		$this->load->view('css/template.css');
+		$this->load->view('head');
+		foreach($data['query'] as $r){
+		$like = array('like_qurey' => $this->Get_infos->get_like(),
+					  'card_id' => $r->card_id,
+					  'user_id' => $r->user_id
+						);
+		$this->load->view("template/".$r->template,$r);
+		$this->load->view('template/Status_card',$like);
+		}
 	}
 	public function del_card_like(){
 		$card_id = $this->input->get('card_id');
@@ -534,6 +550,8 @@ class Welcome extends CI_Controller {
 		if($data ['query'] == NULL){
 			$this->load->view('Alert_like');
 		}
+		$this->load->view('css/template.css');
+		$this->load->view('head');
 		foreach($data['query'] as $r){
 				$like = array('like_qurey' => $this->Get_infos->get_like(),
 							  'card_id' => $r->card_id,
