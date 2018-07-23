@@ -1,9 +1,8 @@
 <?php echo form_open_multipart('welcome/searchs'); ?>
 <?php if (isset($query)): ?>
-	<body>
+<div class="point">
 	<div class="container" style="width: 40%; color: #fff;">
         <form class="form-inline" style="padding-top: 30px">
-          	
             <label>Search work</label>
             <input type="text" placeholder="All work" class="form-control" name="word" >
                 <div style="width: 48%; float: left;">
@@ -36,5 +35,5 @@
           </div>
         </form>
     </div>
+  </div>
 <?php endif; ?>
-</body>

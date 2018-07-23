@@ -1,19 +1,16 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="utf-8">
+<title>Admin Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Kanit|Prompt:400,600,700" rel="stylesheet">
-  <style>
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+<style type="text/css">
   .bg-1 { 
-      background-color: #1abc9c;
+    background-image: url(<?php echo base_url() . 'assets/image/bg_home.jpg' ?>);
       color: #ffffff;
-      font-family: 'Prompt', sans-serif;
+      font-family: 'Kanit', sans-serif;
   }
   .border
   {
@@ -23,31 +20,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	-webkit-border-radius: 6px 6px 30px 6px;
 	border-radius: 6px 6px 30px 6px;
   }
-  .container
-  {
-  	padding-top: 10%; 
+  titlemain{
+    color: #fff;
+    font-size: 30px;
   }
-  h2
-  {
+  h2{
   	color: #707070;
   }
 
-  input:invalid+span:after {
-  content: '✖';
-  padding-left: 5px;
-}
-
-input:valid+span:after {
-  content: '✓';
-  padding-left: 5px;
-}
+  form{
+    margin-bottom: 0;
+  }
+  .border_show
+  {
+    padding: 15px 15px 15px 15px;
+    background: #fff;
+    background: #fff;
+    box-shadow: 2px 5px 7px #70707070;
+    word-wrap:break-word;
+  }
+  .container
+  {
+    padding-top: 10px;
+  }
+  name{
+    font-size: 20px;
+    color: #707070;
+  }
+  timepost{
+     font-size: 15px;
+     color: #707070;
+  }
+  contact{
+     font-size: 17px;
+     color: #606060;
+  }
+  p{
+    color: #707070;
+    font-size: 70%;
+  }
+  type{
+    font-size: 15px;
+    color: #707070;
+  }
+  datail{
+    font-size: 12px;
+    color: #707070;
+  }
+  last{
+    font-size: 10px;
+    color: #fff;
+  }
+  .fallbackLabel{
+  	font-size: 15px;
+  }
 
   </style>
 </head>
 <body class="bg-1">
 	<div class="container" style="width: 40%; color: #707070;">
 		<div class="border">
-	  	<h2><center>Form</center></h2>
+	  	<h2><center>Register</center></h2>
 	  	<?php echo form_open_multipart('welcome/add_user'); ?>
 	  	<form>
 	  		<div class="row">
@@ -131,23 +164,6 @@ input:valid+span:after {
 		    <div class="row">
 	    		<div class="col">
 			    	<div class="form-group">
-			      			<input type="text" class="form-control" placeholder="District" name="district" required>
-			    	</div>
-		    	</div>
-	    		<div class="col">
-			    	<div class="form-group">
-			      			<input type="text" class="form-control" placeholder="Province" name="province" required>
-			    	</div>
-		    	</div>
-		    	<div class="col">
-			    	<div class="form-group">
-			      			<input type="text" class="form-control" placeholder="Zip code" name="zip_code" required>
-			    	</div>
-		    	</div>
-		    </div>
-		    <div class="row">
-	    		<div class="col">
-			    	<div class="form-group">
 			      			<input type="password" class="form-control" placeholder="password" name="password" required>
 			      			<small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
 							echo $message_display;
@@ -165,9 +181,6 @@ input:valid+span:after {
 			    	</div>
 		    	</div>
 		    </div>
-	    	<div class="form-group">
-	      		<input type="file" class="form-control" placeholder="File" name="featured" required>
-	    	</div>
 	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
 	    		<input type="reset" class="btn btn-default" value="Reset">
 	    		<a href="<?php echo base_url() ?>index.php/welcome/login_form/">Login</a>
@@ -293,4 +306,3 @@ daySelect.onchange = function() {
 }
 	</script>
 </body>
-</html>

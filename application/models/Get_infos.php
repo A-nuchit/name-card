@@ -11,7 +11,14 @@ class Get_infos extends CI_Model
 		$data = $this->db->get('member');
         return $data->result();
 	}
-
+	public function get_now_member(){
+		$user_id = $this->session->userdata['logged_in']['user_id'];
+		$this->db->select('*');
+		$this->db->from('member');
+		$this->db->where('user_id',$user_id);
+		$data = $this->db->get();
+        return $data->result();
+	}
 	public function get_lasttimelogin($data){
 		$this->db->select('*');
 		$this->db->from('login');
@@ -37,6 +44,17 @@ class Get_infos extends CI_Model
 		$data = $this->db->get();
         return $data->result();
 	}
+	public function get_address()
+	{
+		$this->db->select('member.district,
+							member.province,
+							member.zip_code
+							');
+		$this->db->from('member');
+		$this->db->where('user_id',$this->session->userdata['logged_in']['user_id']);
+		$data = $this->db->get();
+        return $data->result();
+	}
 	public function get_a_card($card_id)
 	{
 		$this->db->select('	card.card_id,
@@ -55,6 +73,7 @@ class Get_infos extends CI_Model
 							card.province_card,
 							card.zip_code_card,
 							card.type_job,
+							card.template,
 							work_type.nametype ');
 		$this->db->from('card');
 		$this->db->where('card_id',$card_id);
@@ -84,6 +103,7 @@ class Get_infos extends CI_Model
 							card.pic_logo,
 							card.detail,
 							card.type_job,
+							card.template,
 							work_type.nametype '
 					);
 		$this->db->from('card');
@@ -111,6 +131,7 @@ class Get_infos extends CI_Model
 							card.pic_bg,
 							card.pic_logo,
 							card.type_job,
+							card.template,
 							work_type.nametype');
 		$this->db->from('like');
 		$this->db->where('id',$user_id);
@@ -139,6 +160,7 @@ class Get_infos extends CI_Model
 							card.province_card,
 							card.pic_logo,
 							card.type_job,
+							card.template,
 							work_type.nametype '
 					);
 

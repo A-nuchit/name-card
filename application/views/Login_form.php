@@ -8,20 +8,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Kanit|Prompt:400,600,700" rel="stylesheet">
-  <style>
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+<style type="text/css">
   .bg-1 { 
-      background-color: #1abc9c;
+    background-image: url(<?php echo base_url() . 'assets/image/bg_home.jpg' ?>);
       color: #ffffff;
-      font-family: 'Prompt', sans-serif;
+      font-family: 'Kanit', sans-serif;
   }
-  .border
+     .border
   {
-  	padding: 5% 5% 5% 5%;
-  	background: #fff;
-  	box-shadow: 2px 5px 7px #70707070;
-  	-webkit-border-radius: 6px 6px 30px 6px;
-	border-radius: 6px 6px 30px 6px;
+    padding: 5% 5% 5% 5%;
+    background: #fff;
+    box-shadow: 2px 5px 7px #70707070;
+    -webkit-border-radius: 6px 6px 30px 6px;
+    border-radius: 6px 6px 30px 6px;
   }
   .container
   {

@@ -5,29 +5,34 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Kanit|Prompt:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style type="text/css">
-  .bg-1 { 
-      background-color: #1abc9c;
+  body { 
+      background-image: url(<?php echo base_url() . 'assets/image/bg_home.jpg' ?>);
       color: #ffffff;
-      font-family: 'Prompt', sans-serif;
+      font-family: 'Kanit', sans-serif;
+  }
+  nav{
+    font-family: 'Kanit', sans-serif;
   }
   	 .border
   {
   	padding: 5% 5% 5% 5%;
   	background: #fff;
-  	box-shadow: 2px 5px 7px #70707070;
+  	box-shadow: 2px 5px 7px #707070;
   	-webkit-border-radius: 6px 6px 30px 6px;
 	  border-radius: 6px 6px 30px 6px;
   }
-    h2
-  {
+  titlemain{
+    color: #fff;
+    font-size: 30px;
+  }
+  h2{
   	color: #707070;
   }
-  .container
-  {
-    padding-top: 20px;
-  }
+
   form{
     margin-bottom: 0;
   }
@@ -38,11 +43,10 @@
     background: #fff;
     box-shadow: 2px 5px 7px #70707070;
     word-wrap:break-word;
-    
   }
   .container
   {
-    padding-top: 20px;
+    padding-top: 10px;
   }
   name{
     font-size: 20px;
@@ -72,23 +76,22 @@
     font-size: 10px;
     color: #fff;
   }
-
   </style>
 </head>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
   $username = ($this->session->userdata['logged_in']['username']);
   $email = ($this->session->userdata['logged_in']['email']); ?>
-  <body class="bg-1">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/index">Navbar</a>
+         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/">Navbar</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_member">Profile</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/profile">Profile</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/create_card">Create card</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/select_tem">Create card</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">Show my card</a>
@@ -97,7 +100,7 @@ if (isset($this->session->userdata['logged_in'])) {
               <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mylike">Show my like</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome">Search</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/search_form">Search</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -115,24 +118,12 @@ if (isset($this->session->userdata['logged_in'])) {
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
-        <?php echo form_open_multipart('welcome/login'); ?>
-        <form>
-          <div class="row">
-            <div class="col-4">
-              <input type="text" class="form-control" placeholder="Username" name="username" required>
-            </div>
-            <div class="col-4">
-              <input type="password" class="form-control" placeholder="password" name="password" required>
-                  </div>
-            <div class="col-4">
-                  <button type="submit" class="btn btn-outline-secondary" style="width: 50%">Login</button>
-                  <a style="padding-right: 30px" href="<?php echo base_url() ?>index.php/welcome/register_form" >  SignUp</a>
-              </div>
-              
-            </div>
-            
-          </div>
-        </form>
+        <a href="<?php echo base_url() ?>index.php/welcome/login_form/" >Login</a>
+        <a style="padding-left: 20px" href="<?php echo base_url() ?>index.php/welcome/register_form/" >Register</a>
+        <div style="padding-left: 20px">
+          <button style=" width: 100px;" type="button" class="btn btn-primary" onclick="location.href='<?php echo base_url()?>index.php/welcome/search_form'">Search</button>
+        </div>
+        
         </div>
     </nav>
   </body>

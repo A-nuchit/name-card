@@ -16,9 +16,11 @@
     		?>
     		<fieldset disabled>
         <div class="form-group">
+            <label style="color: #707070;">Name job</label>
             <input type="text"  class="form-control" name="topic" placeholder="NameJob" class="form-control" value="<?php echo $r->topic ?>" required>
         </div>
         <div class="form-group">
+            <label style="color: #707070;">Detail</label>
             <textarea rows= "5" type="text" name="detail" placeholder="Detail" class="form-control" value="<?php echo $r->detail; ?>" required><?php echo $r->detail; ?></textarea>
         </div>
             </fieldset>
