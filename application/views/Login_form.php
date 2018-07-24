@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body class="bg-1">
 	<div class="container" style="width: 40% ">
 		<div class="border">
-	  	<h2><center>Login</center></h2>
+	  	<h2><center>เข้าสู่ระบบ</center></h2>
 	  	<?php echo form_open_multipart('welcome/login'); ?>
 	  	<form>
 	  		<div class="row">
@@ -56,8 +56,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    	</div>
 		    	</div>
 		    </div>
-	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
-	    	<a href="<?php echo base_url() ?>index.php/welcome/register_form"> SignUp</a>
+	    	<center><button type="submit" class="btn btn-outline-secondary">เข้าสู่ระบบ</button>
+	    	<a href="<?php echo base_url() ?>index.php/welcome/register_form">สร้างบัญชี</a>
 	    	</center>
 	  	</form>
 	  </div>

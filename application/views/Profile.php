@@ -141,12 +141,12 @@
 		<div style="width: 35%; float: left; padding-right: 30px;">
 			<div class="profile_bor">
 				<i class="Small material-icons">email</i>  E-mail : <?php echo $r->email." "; ?><br>
-				<i class="Small material-icons">phone</i>  Tel. : <?php echo $r->tel." "; ?><br>
-				<i class="Small material-icons">cake</i>  Birthday : <?php echo $r->day." ".$r->month." ".$r->year." "; ?><br>
-				<i class="Small material-icons">person_pin_circle</i>  Address : <?php echo $r->district." ".$r->province." ".$r->zip_code; ?><br>
+				<i class="Small material-icons">phone</i>  โทรศัพท์ : <?php echo $r->tel." "; ?><br>
+				<i class="Small material-icons">cake</i>  วันเกิด : <?php echo $r->day." ".$r->month." ".$r->year." "; ?><br>
+				<i class="Small material-icons">person_pin_circle</i>  ที่อยู่ : <?php echo $r->district." ".$r->province." ".$r->zip_code; ?><br>
 			</div>
 			<div style="padding-top: 15px">
-				<a class="btn btn-light" href="<?php echo base_url() ?>index.php/welcome/edit_member">Edit</a>
+				<a class="btn btn-light" href="<?php echo base_url() ?>index.php/welcome/edit_member">แก้ไข</a>
 			</div>
 		</div>
 		<div style="width: 65%; float: right;">

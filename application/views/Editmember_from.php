@@ -187,17 +187,6 @@
                 </div>
             </div>
 	    	<center>
-          <select class="image-picker show-html">
-  <option value=""></option>
-  <option data-img-src="http://placekitten.com/300/200" value="1">Cute Kitten 1</option>
-  <option data-img-src="http://placekitten.com/150/200" value="2">Cute Kitten 2</option>
-  <option data-img-src="http://placekitten.com/400/200" value="3">Cute Kitten 3</option>
-</select>
-          <select name="selectBox1">
-            <option value="img1.png" style="background-color: #000;">male</option>
-            <option value="img2.png" style="background-image:url(img2.png);">female</option>
-            <option value="img2.png" style="background-image:url(img3.png);">others</option>
-          </select> 
           <button type="submit" class="btn btn-outline-secondary">บันทึก</button>
 	    	</center>
 	  	</form>

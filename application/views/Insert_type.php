@@ -1,7 +1,7 @@
  <div class="container" style="width: 40% ">
 <?php echo form_open_multipart('welcome/add_type'); ?>
     <form clas>
-        <label style="color: #fff;">Add type work</label>       
+        <label style="color: #fff;">เพิ่มประเภทของงาน</label>       
             <div class="form-group">
                     <input type="text" class="form-control" placeholder="Work type" name="work_type" required>
             </div>

@@ -68,7 +68,6 @@ class Welcome extends CI_Controller {
 					$this->load->view('template/Status_card',$like);
 				}
 				echo '</div>';
-				
 		}
 	}
 	public function edit_card(){
@@ -335,6 +334,7 @@ class Welcome extends CI_Controller {
 					$this->load->view('Alert_Null');
 				}
 				$this->load->view('css/template.css');
+				$this->load->view('head_mycard.php');
 				$this->load->view('head');
 				foreach($data['query'] as $r){
 					$like = array('like_qurey' => $this->Get_infos->get_like(),
@@ -365,6 +365,7 @@ class Welcome extends CI_Controller {
 					$this->load->view('Alert_Null');
 				}
 				$this->load->view('css/template.css');
+				$this->load->view('head_mylike.php');
 				$this->load->view('head');
 				foreach($data['query'] as $r){
 					$like = array('like_qurey' => $this->Get_infos->get_like(),

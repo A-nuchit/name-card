@@ -84,28 +84,28 @@ if (isset($this->session->userdata['logged_in'])) {
   $email = ($this->session->userdata['logged_in']['email']); ?>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/">Navbar</a>
+         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome/">หน้าหลัก</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/profile">Profile</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/profile">โปรไฟล์</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/select_tem">Create card</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/select_tem">สร้างนามบัตร</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">Show my card</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mycard">นามบัตรของฉัน</a>
             </li>
              <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mylike">Show my like</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/show_mylike">บันทึก</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/search_form">Search</a>
+              <a class="nav-link" href="<?php echo base_url() ?>index.php/welcome/search_form">ค้นหา</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/index" >Welcome , <?php echo $username ?></a>
-            <a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >Sign Out</a>
+          <a class="nav-link"href="<?php echo base_url() ?>index.php/welcome/index" >ยินดีต้อนรับ , <?php echo $username ?></a>
+            <a class="btn btn-primary" href="<?php echo base_url() ?>index.php/welcome/logout/" >ออกจากระบบ</a>
         </form>
         </div>
     </nav>
@@ -114,14 +114,14 @@ if (isset($this->session->userdata['logged_in'])) {
 } else { ?>
   <body class="bg-1">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome">HOME</a>
+         <a class="navbar-brand" href="<?php echo base_url() ?>index.php/welcome">หน้าหลัก</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
-        <a href="<?php echo base_url() ?>index.php/welcome/login_form/" >Login</a>
-        <a style="padding-left: 20px" href="<?php echo base_url() ?>index.php/welcome/register_form/" >Register</a>
+        <a href="<?php echo base_url() ?>index.php/welcome/login_form/" >เข้าสู่ระบบ</a>
+        <a style="padding-left: 20px" href="<?php echo base_url() ?>index.php/welcome/register_form/" >สร้างบัญชี</a>
         <div style="padding-left: 20px">
-          <button style=" width: 100px;" type="button" class="btn btn-primary" onclick="location.href='<?php echo base_url()?>index.php/welcome/search_form'">Search</button>
+          <button style=" width: 100px;" type="button" class="btn btn-primary" onclick="location.href='<?php echo base_url()?>index.php/welcome/search_form'">ค้นหา</button>
         </div>
         
         </div>

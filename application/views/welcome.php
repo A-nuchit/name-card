@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-sm-7" style="padding-left: 80px; padding-top: 60px;">
 		<div class="topichead">
-			<p1>Looking for</p1><h1>expert for any <br>job, online</h1>
+			<p1>คุณกำลังตามหา</p1><h1>งานที่ใช่<br>อยู่หรือเปล่า ?</h1>
 			<div style="padding-top: 30px">
-				<button style=" width: 170px;" type="button" class="btn btn-primary" onclick="location.href='<?php echo base_url()?>index.php/welcome/register_form'"> Getstard </button>
+				<button style=" width: 170px;" type="button" class="btn btn-primary" onclick="location.href='<?php echo base_url()?>index.php/welcome/register_form'"> เริ่มต้นใช้งาน </button>
 			</div>
 			
 		</div>

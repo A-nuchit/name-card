@@ -80,53 +80,53 @@
 <body class="bg-1">
 	<div class="container" style="width: 40%; color: #707070;">
 		<div class="border">
-	  	<h2><center>Register</center></h2>
+	  	<h2><center>สร้างบัญชี</center></h2>
 	  	<?php echo form_open_multipart('welcome/add_user'); ?>
 	  	<form>
 	  		<div class="row">
 	    		<div class="col">
 			    	<div class="form-group">
-			      			<input type="text" class="form-control" placeholder="Username" name="username" required>
+			      			<input type="text" class="form-control" placeholder=ชื่อบัญชี name="username" required>
 			    	</div>
 		    	</div>
 		    </div>
 	  		<div class="row">
 	  			<div class="col">
 		    		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="name" name="name" required>
+		      			<input type="text" class="form-control" placeholder="ชื่อ" name="name" required>
 		      			<small id="emailHelp" class="form-text text-danger"></small>
 		    		</div>
 		    	</div>
 		    	<div class="col">
 		    		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="lastname" name="lastname" required>
+		      			<input type="text" class="form-control" placeholder="นามสกุล" name="lastname" required>
 		    		</div>
 	    		</div>
 	    	</div>
 	    	<div style="padding-bottom: 7px;">
 		    	<div class="form-check form-check-inline">
 	  				<input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1">
-	  				<label class="form-check-label" for="inlineRadio1">Male</label>
+	  				<label class="form-check-label" for="inlineRadio1">ชาย</label>
 				</div>
 				<div class="form-check form-check-inline">
 	  				<input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="2">
-	  				<label class="form-check-label" for="inlineRadio2">Female</label>
+	  				<label class="form-check-label" for="inlineRadio2">หญิง</label>
 				</div>
 			</div>
 			<div class="nativeDatePicker">
-				<label for="bday">Enter your birthday:</label>
+				<label for="bday">วันเกิด :</label>
 				<input type="date" id="bday" name="bday">
 				<span class="validity"></span>
 			</div>
-			<p class="fallbackLabel">Enter your birthday:</p>
+			<p class="fallbackLabel">วันเกิด :</p>
 			<div class="fallbackDatePicker">
 			  <span>
-			    <label for="day">Day:</label>
+			    <label for="day">วัน:</label>
 			    <select id="day" name="day">
 			    </select>
 			  </span>
 			  <span>
-			    <label for="month">Month:</label>
+			    <label for="month">เดือน:</label>
 			    <select id="month" name="month">
 			      <option value="1" selected>January</option>
 			      <option value="2">February</option>
@@ -143,12 +143,12 @@
 			    </select>
 			  </span>
 			  <span>
-			    <label for="year">Year:</label>
+			    <label for="year">ปี:</label>
 			    <select id="year" name="year">
 			    </select>
 			  </span>
 			</div>
-		    <label >Address</label>
+		    <label >ข้อมูลทั่วไป</label>
 		    <div class="row">
 	    		<div class="col">
 			    	<div class="form-group">
@@ -157,14 +157,15 @@
 		    	</div>
 	    		<div class="col">
 			    	<div class="form-group">
-			      			<input type="text" class="form-control" placeholder="Tel" name="tel" required>
+			      			<input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="tel" required>
 			    	</div>
 		    	</div>
 		    </div>
+        <label >รหัสผ่าน</label>
 		    <div class="row">
 	    		<div class="col">
 			    	<div class="form-group">
-			      			<input type="password" class="form-control" placeholder="password" name="password" required>
+			      			<input type="password" class="form-control" placeholder="รหัสผ่าน" name="password" required>
 			      			<small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
 							echo $message_display;
 							} ?></small>
@@ -174,7 +175,7 @@
 		    <div class="row">
 	    		<div class="col">
 			    	<div class="form-group">
-			      			<input type="password" class="form-control" placeholder="comfirm password" name="confirm-password" required>
+			      			<input type="password" class="form-control" placeholder="กรอกรหัสผ่านอีกครั้ง" name="confirm-password" required>
 			      			<small id="emailHelp" class="form-text text-danger"><?php if (isset($message_display)) {
 							echo $message_display;
 							} ?></small>
@@ -182,8 +183,8 @@
 		    	</div>
 		    </div>
 	    	<center><button type="submit" class="btn btn-outline-secondary">ยืนยัน</button>
-	    		<input type="reset" class="btn btn-default" value="Reset">
-	    		<a href="<?php echo base_url() ?>index.php/welcome/login_form/">Login</a>
+	    		<input type="reset" class="btn btn-default" value="เริ่มต้นใหม่">
+	    		<a href="<?php echo base_url() ?>index.php/welcome/login_form/">เข้าสู่ระบบ</a>
 
 	    	</center>
 	  	</form>

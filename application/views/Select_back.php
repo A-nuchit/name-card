@@ -15,10 +15,10 @@
 <div class="border">
   <div style="padding-bottom: 30px">
     <center>
-      <titlesel>background</titlesel>
+      <titlesel>เลือกพื้นหลัง</titlesel>
     </center>
   </div>
-    <label style="color: #707070; font-size: 20px;">Choose background</label>
+    <label style="color: #707070; font-size: 20px;">คลิกเพื่อเลือกพื้นหลัง</label>
     <div class="row">
       <div class="col-sm-6">
         <a class="click" href='<?php echo base_url() ?>index.php/welcome/create_card?back=bg_tem1.jpg&tem=<?php echo $back ?>'><img src="<?php echo base_url() . 'assets/image/bg_tem1.jpg' ?>" style="width:100%"> </a>
@@ -38,9 +38,8 @@
     <center>
       <!-- <div style="font-size: 40px; color: #707070 ;">Or</div> -->
     </center>
-    <label style="color: #707070; font-size: 20px;">or Import backgroung</label>
+    <label style="color: #707070; font-size: 20px;">กำหนดพื้นหลังด้วยตัวเอง</label>
     <div class="form-group" style="display: none;">
-      <label class="mr-sm-2" style="color: #707070; font-size: 15px;">Template select</label>
       <input type="text" name="tem" class="form-control" value="<?php echo $back; ?>" >
     </div>
     <?php echo form_open_multipart('welcome/create_card'); ?>
@@ -49,12 +48,11 @@
       <input type="text" name="tem" value="<?php echo $back ?>">
     </div>
     <div class="form-group"">
-      <label style="color: #707070; font-size: 15px;">Backgound picture.</label>
+      <label style="color: #707070; font-size: 15px;">นำเข้ารูปภาพ</label>
       <input type="file" class="form-control" placeholder="File" name="pic_bg" required>
        <div style="padding-top: 10px">
           <center>
             <button type="submit" class="btn btn-outline-secondary">อัพโหลด</button>
-            <input type="reset" class="btn btn-default" value="Reset">
           </center>
       </div>
     </div>

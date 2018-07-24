@@ -30,8 +30,7 @@
                     <datail> Tel : <?php echo $tel; ?></datail>
                   </div>
                 </div>
-               
-                   
+                
               <?php } ?>
             </div>
           </div>

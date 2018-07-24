@@ -13,9 +13,10 @@
 </style>
 <div class="container" style="width: 50%" >
 <div class="border">
-  <div style="padding-bottom: 30px">
+  <div style="padding-bottom: 10px">
     <center>
-      <titlesel>Select template</titlesel>
+      <titlesel>เลือกรูปแบบนามบัตร<br></titlesel>
+      <label style="color: #707070; font-size: 13px">คลิกที่รูปเพื่อเลือกรูปแบบนามบัตร</label>
     </center>
   </div>
   <form action="/action_page.php">

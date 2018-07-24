@@ -1,6 +1,6 @@
     <div class="container" style="width: 40% ">
         <div class="border">
-        <h2><center>Insert Post</center></h2>
+        <h2><center>แก้ไขนามบัตร</center></h2>
         <?php echo form_open_multipart('welcome/add_post'); ?>
         <form>
 
